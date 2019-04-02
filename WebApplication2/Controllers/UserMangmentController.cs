@@ -35,7 +35,7 @@ namespace WebApplication2.Controllers
         {
 
         } 
-        public void DeleteUset()
+        public void DeleteUser()
         {
 
         }

@@ -15,5 +15,6 @@ namespace WebApplication2.Models
         }
 
         public string Description { get; set; }
+        public bool Deleted { get; set; }
     }
 }
