@@ -13,6 +13,7 @@ using WebApplication2.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApplication2.Models;
+using WebApplication2.Services;
 
 namespace WebApplication2
 {
@@ -35,6 +36,7 @@ namespace WebApplication2
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddSingleton<UserMangmentService, UserMangmentService>();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

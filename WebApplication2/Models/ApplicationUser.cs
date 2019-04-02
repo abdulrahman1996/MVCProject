@@ -17,6 +17,8 @@ namespace WebApplication2.Models
         public string City { get; set; }
         public string Country { get; set; }
         public string Gender { get; set; }
+        public int BlockState { get; set; }
+        
         public virtual ICollection<Post> Posts { get; set; }
     }
 }
