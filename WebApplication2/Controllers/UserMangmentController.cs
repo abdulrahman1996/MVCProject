@@ -15,6 +15,7 @@ namespace WebApplication2.Controllers
         public UserMangmentController(UserMangmentService service)
         {
             //kj
+            //hahah
             Service = service;
         }
         public IActionResult Index()
