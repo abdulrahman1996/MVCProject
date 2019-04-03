@@ -14,6 +14,7 @@ namespace WebApplication2.Controllers
         private readonly UserMangmentService Service;
         public UserMangmentController(UserMangmentService service)
         {
+            //kj
             Service = service;
         }
         public IActionResult Index()
