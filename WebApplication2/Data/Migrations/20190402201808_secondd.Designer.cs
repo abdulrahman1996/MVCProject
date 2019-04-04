@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication2.Data;
 
 namespace WebApplication2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190402201808_secondd")]
+    partial class secondd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,8 +115,6 @@ namespace WebApplication2.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<bool>("Deleted");
-
                     b.Property<string>("Description");
 
                     b.Property<string>("Name")
@@ -140,7 +140,7 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<bool>("Blocked");
+                    b.Property<int>("BlockState");
 
                     b.Property<string>("City");
 
@@ -148,8 +148,6 @@ namespace WebApplication2.Data.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Country");
-
-                    b.Property<bool>("Deleted");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -203,8 +201,6 @@ namespace WebApplication2.Data.Migrations
                     b.Property<string>("Content")
                         .IsRequired();
 
-                    b.Property<bool>("Deleted");
-
                     b.Property<int?>("PostID");
 
                     b.Property<DateTime>("Timestamp");
@@ -225,8 +221,6 @@ namespace WebApplication2.Data.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Deleted");
 
                     b.Property<string>("RequestedID");
 
@@ -249,8 +243,6 @@ namespace WebApplication2.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Deleted");
-
                     b.Property<int?>("PostID");
 
                     b.Property<string>("UserID");
@@ -272,8 +264,6 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired();
-
-                    b.Property<bool>("Deleted");
 
                     b.Property<DateTime>("Timestamp");
 
