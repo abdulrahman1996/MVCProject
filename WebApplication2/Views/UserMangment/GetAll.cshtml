@@ -1,0 +1,68 @@
+﻿@model IEnumerable<WebApplication2.Models.ApplicationUser>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Blocked)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+           
+            <div class="col-md-10">
+                @*@Html.DropDownList("AllRoles",null, htmlAttributes: new { @class = "form-control" })*@
+                @*@Html.DropDownListFor(x=>item., ViewBag.CityList as SelectList, new { @class = "form-control" })*@
+            </div>
+
+
+
+            <td>
+                <a asp-action="blockUser" asp-route-userID="@item.Id" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData" name="userID"><input type="checkbox" checked=@item.Blocked></a> |
+                <a asp-action="Delete" asp-route-userID="@item.Id" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">Delete</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

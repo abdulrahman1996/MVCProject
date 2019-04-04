@@ -42,6 +42,10 @@
                         <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
                     </p>
                 </div>
+                <div class="form-group">
+                    <button class=" btn-default btn">sign in with facebook</button>
+                   @Html.ActionLink("sign up with facebook","SignUp")
+                </div>
             </form>
         </section>
     </div>
