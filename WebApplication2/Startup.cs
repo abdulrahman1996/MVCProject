@@ -36,7 +36,7 @@ namespace WebApplication2
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddSingleton<UserMangmentService, UserMangmentService>();
+            services.AddScoped<UserMangmentService, UserMangmentService>();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -48,7 +48,11 @@ namespace WebApplication2
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+<<<<<<< HEAD
 
+=======
+            services.AddScoped<ApplicationDbContext, ApplicationDbContext>();
+>>>>>>> e9e66357204fd5acd3a80d63ff855a4f9b89649c
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             //services.AddAuthentication().AddFacebook(f => { f.AppId = "797388533951711"; f.AppSecret = "a9314c03cc8cdd7d24673006cde25b7c"; });
 
