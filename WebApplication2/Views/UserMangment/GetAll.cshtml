@@ -1,8 +1,4 @@
 ﻿@model IEnumerable<WebApplication2.Models.ApplicationUser>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -26,12 +22,9 @@
                 @Html.DisplayNameFor(model => model.Gender)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Deleted)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Blocked)
             </th>
-        
+
         </tr>
     </thead>
     <tbody>
@@ -57,17 +50,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Gender)
             </td>
+           
             <div class="col-md-10">
                 @*@Html.DropDownList("AllRoles",null, htmlAttributes: new { @class = "form-control" })*@
-                @*@Html.DropDownListFor(model => model.City, ViewBag.CityList as SelectList, new { @class = "form-control" })*@
+                @*@Html.DropDownListFor(x=>item., ViewBag.CityList as SelectList, new { @class = "form-control" })*@
             </div>
 
 
 
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="blockUser" asp-route-userID="@item.Id" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData" name="userID"><input type="checkbox" checked=@item.Blocked></a> |
+                <a asp-action="Delete" asp-route-userID="@item.Id" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">Delete</a> |
             </td>
         </tr>
 }

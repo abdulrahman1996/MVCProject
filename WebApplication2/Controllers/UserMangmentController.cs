@@ -15,46 +15,58 @@ namespace WebApplication2.Controllers
     public class UserMangmentController : Controller
     {
         private readonly UserMangmentService UserService;
-        private ApplicationDbContext db;
-        public UserMangmentController(UserMangmentService service,ApplicationDbContext context)
+       // private ApplicationDbContext db;
+        public UserMangmentController(UserMangmentService service)
         {
             UserService = service;
-            db = context;
+          
         }
         public IActionResult Index()
         {
-            var res = db.Roles.ToList();
-            ViewBag.AllRoles = res;
+            //var res = db.Roles.ToList();
+            ViewBag.AllRoles = UserService.GetAll();
             return View(UserService.GetAll());
         }
         public  IActionResult GetAll()
         {
-            var res = db.Roles.ToList();
-            Debug.WriteLine(res);
+           
            // ViewBag.AllRoles = res;
-            ViewBag.AllRoles = new SelectList(db.Roles, "Id", "Name");
+           // ViewBag.AllRoles = new SelectList(UserService.GetAllRoles(), "Id", "Name");
 
             return PartialView(UserService.GetAll());
         }
-        public List<ApplicationUser> SearchUser()
-
+        [HttpPost]
+       public IActionResult SearchByUsername(string username)
         {
-          //  Service.GetAll();
-            throw new NotImplementedException();
+            var res = UserService.SearchByUsername(username);
+
+            return PartialView("GetAll", UserService.SearchByUsername(username));
         }
-         
-        public void Block(int Id)
+        [HttpPost]
+        public IActionResult blockUser(string userID)
         {
-
+            UserService.BlockUser(userID);
+            return PartialView("GetAll",UserService.GetAll());
         }
-        public void CreateUser(ApplicationUser  user )
+        [HttpPost]
+        public IActionResult Delete(string userID)
         {
-
-        } 
-        public void DeleteUser()
-        {
-
+            UserService.DeleteUser(userID);
+            return PartialView("GetAll", UserService.GetAll());
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(ApplicationUser User,string Password)
+        {
+            UserService.CreateUser(User, Password);
+            return RedirectToAction("Index");
+        }
+
 
     }
 }
