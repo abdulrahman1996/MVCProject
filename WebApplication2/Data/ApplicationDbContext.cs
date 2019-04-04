@@ -18,5 +18,6 @@ namespace WebApplication2.Data
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<FriendRequest> FriendRequests { get; set; }
+        public DbSet<WebApplication2.Models.ApplicationRole> ApplicationRole { get; set; }
     }
 }
