@@ -48,7 +48,10 @@ namespace WebApplication2
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //services.AddAuthentication().AddFacebook(f => { f.AppId = "797388533951711"; f.AppSecret = "a9314c03cc8cdd7d24673006cde25b7c"; });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
