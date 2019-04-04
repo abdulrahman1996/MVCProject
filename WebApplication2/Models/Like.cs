@@ -14,5 +14,7 @@ namespace WebApplication2.Models
         public virtual ApplicationUser User { get; set; }
         [ForeignKey("PostID")]
         public virtual Post Post { get; set; }
+        public bool Deleted { get; set; }
+
     }
 }

@@ -17,5 +17,6 @@ namespace WebApplication2.Models
         public virtual ApplicationUser Requester { get; set; }
         [ForeignKey("RequestedID")]
         public virtual ApplicationUser Requested { get; set; }
+        public bool Deleted { get; set; }
     }
 }

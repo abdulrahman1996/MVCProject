@@ -18,5 +18,7 @@ namespace WebApplication2.Models
         public virtual ApplicationUser User { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
+        public bool Deleted { get; set; }
+
     }
 }
