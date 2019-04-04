@@ -1,0 +1,16 @@
+﻿@model ApplicationUser
+<form asp-action="Edit" data-ajax-method="post" data-ajax-mode="replace" data-ajax-update="#formEdit" data-ajax="true"  class="col-lg-4">
+  
+    <div class="form-inline">
+        <label asp-for="UserName">
+        </label>
+        <input class="form-control" asp-for="UserName" />
+    </div>
+
+    <div class="form-inline">
+        <label asp-for="Email">
+        </label>
+        <input class="form-control" asp-for="Email" />
+    </div>
+
+</form>
