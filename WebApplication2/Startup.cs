@@ -37,6 +37,7 @@ namespace WebApplication2
             });
 
             services.AddSingleton<UserMangmentService, UserMangmentService>();
+            services.AddScoped<RoleMangmentService, RoleMangmentService>();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
