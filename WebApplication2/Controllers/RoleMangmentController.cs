@@ -43,7 +43,8 @@ namespace WebApplication2.Controllers
         public IActionResult Create(ApplicationRole applicationRole)
         {
             Service.AddRole(applicationRole);
-            return PartialView("GetAll", Service.GetAll());
+            return RedirectToAction("Index");
+            //return PartialView("GetAll", Service.GetAll());
         }
         public IActionResult Edit(string id)
         {
