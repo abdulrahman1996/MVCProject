@@ -13,14 +13,14 @@ namespace WebApplication2.Services
     {
         private ApplicationDbContext db;
         private UserManager<ApplicationUser> UserManager;
-        public UserMangmentService(ApplicationDbContext CurrentContext,UserManager<ApplicationUser>usermanager)
+        public UserMangmentService(ApplicationDbContext CurrentContext, UserManager<ApplicationUser> usermanager)
         {
             db = CurrentContext;
             UserManager = usermanager;
         }
         public List<ApplicationUser> GetAll()
         {
-            return db.Users.Where(item=>item.Deleted!=true).ToList();
+            return db.Users.Where(item => item.Deleted != true).ToList();
         }
         public List<ApplicationRole> GetAllRoles()
         {
@@ -38,13 +38,14 @@ namespace WebApplication2.Services
             db.SaveChanges();
         }
         public void DeleteUser(string userID)
-        {  var res = db.Users.Find(userID);
+        {
+            var res = db.Users.Find(userID);
             res.Deleted = !res.Deleted;
             db.SaveChanges();
         }
-        public async void CreateUser(ApplicationUser User,string password)
+        public async void CreateUser(ApplicationUser User, string password)
         {
-          var result= await UserManager.CreateAsync(User, password);
+            var result = await UserManager.CreateAsync(User, password);
             var x = result.Succeeded;
         }
 

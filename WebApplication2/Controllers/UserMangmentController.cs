@@ -15,11 +15,11 @@ namespace WebApplication2.Controllers
     public class UserMangmentController : Controller
     {
         private readonly UserMangmentService UserService;
-       // private ApplicationDbContext db;
+        // private ApplicationDbContext db;
         public UserMangmentController(UserMangmentService service)
         {
             UserService = service;
-          
+
         }
         public IActionResult Index()
         {
@@ -27,16 +27,16 @@ namespace WebApplication2.Controllers
             ViewBag.AllRoles = UserService.GetAll();
             return View(UserService.GetAll());
         }
-        public  IActionResult GetAll()
+        public IActionResult GetAll()
         {
-           
-           // ViewBag.AllRoles = res;
-           // ViewBag.AllRoles = new SelectList(UserService.GetAllRoles(), "Id", "Name");
+
+            // ViewBag.AllRoles = res;
+            // ViewBag.AllRoles = new SelectList(UserService.GetAllRoles(), "Id", "Name");
 
             return PartialView(UserService.GetAll());
         }
         [HttpPost]
-       public IActionResult SearchByUsername(string username)
+        public IActionResult SearchByUsername(string username)
         {
             var res = UserService.SearchByUsername(username);
 
@@ -46,7 +46,7 @@ namespace WebApplication2.Controllers
         public IActionResult blockUser(string userID)
         {
             UserService.BlockUser(userID);
-            return PartialView("GetAll",UserService.GetAll());
+            return PartialView("GetAll", UserService.GetAll());
         }
         [HttpPost]
         public IActionResult Delete(string userID)
@@ -57,11 +57,10 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-
             return View();
         }
         [HttpPost]
-        public IActionResult Create(ApplicationUser User,string Password)
+        public IActionResult Create(ApplicationUser User, string Password)
         {
             UserService.CreateUser(User, Password);
             return RedirectToAction("Index");
