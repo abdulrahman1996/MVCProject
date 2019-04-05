@@ -1,4 +1,12 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-<partial name="GetAll" model="@Model" />
+
+<form asp-action="SearchByUsername" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">
+    <input type="text" placeholder="enter username" name="username">
+    <input type="submit" value="Search" class="btn btn-block">
+</form>
+<a asp-action="Create">Create User</a>
+<div id="AllData">
+    <partial name="GetAll" model="@Model" />
+</div>

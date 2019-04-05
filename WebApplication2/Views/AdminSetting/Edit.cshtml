@@ -1,0 +1,23 @@
+﻿@model ApplicationUser
+<form asp-action="Edit" data-ajax-method="post" data-ajax-mode="replace" data-ajax-update="#formEdit" data-ajax="true"  class="col-lg-4">
+  
+
+    <div class="form-group">
+        <label class="control-label" asp-for="UserName">
+        </label>
+        <input class="form-control" asp-for="UserName" />
+    </div>
+
+    <div class="form-group">
+        <label  class="control-label"asp-for="Email">
+        </label>
+        <input  type="email" class="form-control" asp-for="Email" />
+        <span asp-validation-for="Email" ></span>
+    </div>
+
+    <div class="form-group">
+        <input  type="submit" class="btn btn-success"/>
+    </div>
+    
+
+</form>
