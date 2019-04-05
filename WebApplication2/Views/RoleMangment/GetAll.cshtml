@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WebApplication2.Models.ApplicationRole>
+
+
+<table class="table table-condensed">
+    <thead>
+        <tr>
+           
+            @*<th>
+                @Html.DisplayNameFor(model => model.Deleted)
+            </th>*@
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+             <th class="text-center">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.NormalizedName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConcurrencyStamp)
+            </th>*@
+            <th class="text-center">Edit/Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Deleted)
+        </td>*@
+            <td class="col-md-4 text-center">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td class="col-md-4 text-center">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.NormalizedName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConcurrencyStamp)
+        </td>*@
+            <td class="col-md-4 text-center">
+                <a asp-action="Edit" asp-route-id="@item.Id" data-ajax="true" data-ajax-method="Get" data-ajax-update="#EditData" data-ajax-mode="replace" data-ajax-success="fun2()">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" data-ajax="true" data-ajax-method="Post" data-ajax-update="#MyGetAll" data-ajax-mode="replace">Delete</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
