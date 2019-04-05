@@ -42,16 +42,16 @@ namespace WebApplication2
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDefaultIdentity<IdentityUser>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()/*.AddUserManager<UserManager<ApplicationUser>>()*/;
 
-
-            services.AddScoped<ApplicationDbContext, ApplicationDbContext>();
+            services.AddTransient<UserMangmentService, UserMangmentService>();
+            services.AddTransient<UserManager<ApplicationUser>>();
+            services.AddTransient<ApplicationDbContext, ApplicationDbContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             //services.AddAuthentication().AddFacebook(f => { f.AppId = "797388533951711"; f.AppSecret = "a9314c03cc8cdd7d24673006cde25b7c"; });
 
@@ -76,7 +76,6 @@ namespace WebApplication2
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
