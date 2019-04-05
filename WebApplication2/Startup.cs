@@ -35,6 +35,9 @@ namespace WebApplication2
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddScoped<AdminSettingService, AdminSettingService>();
             services.AddScoped<UserMangmentService, UserMangmentService>();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

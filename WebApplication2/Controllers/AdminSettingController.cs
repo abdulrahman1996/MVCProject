@@ -7,43 +7,62 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Models;
+using WebApplication2.Services;
 
 namespace WebApplication2.Controllers
 {
-    //[Authorize(Roles ="Admin")]
+    [Authorize]
     public class AdminSettingController : Controller
     {
 
-        private UserManager<ApplicationUser> UserManager;
-       
 
-        public AdminSettingController(UserManager<ApplicationUser> _userManager  )
+        private AdminSettingService service { get; }
+
+        public AdminSettingController(AdminSettingService _service)
         {
-            UserManager = _userManager;
-       
-
+            service = _service;
         }
         public async Task< IActionResult> Index()
         {
-            var user =  await UserManager.GetUserAsync(HttpContext.User);
+            var user = await service.GetUser();
             return View(user);
         }
+
+
         [HttpPost]
         public async Task<IActionResult> Edit(string UserName , string Email)
         {
-            var user = await UserManager.GetUserAsync(HttpContext.User);
-            user.Email = Email;
-            user.UserName = UserName;
-            await UserManager.UpdateAsync(user);
-
-            return PartialView("Edit", user);
-
+           
+            return PartialView("Edit", await service.EditUserAsync(Email, UserName));
+ 
         }
-        // post and get 
-        public void ChangePassword()
+
+        [HttpGet]
+        public IActionResult ChangePassword()
         {
-            // confirm
-
+            return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(string OldPassword , string NewPassword)
+        {
+
+            var result =  await service.ChangePasswordAsync(OldPassword, NewPassword);
+
+            
+            if (result.Succeeded)
+            {
+                TempData["updated"] = "Your Password Successfully Updated!";
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.Code.ToString(), error.Description);
+                }
+            }
+
+            return View();
+        }
+
     }
 }
