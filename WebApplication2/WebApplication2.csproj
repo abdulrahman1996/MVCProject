@@ -6,13 +6,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" PrivateAssets="All" />
+    <Compile Remove="Areas\Identity\Services\**" />
+    <Compile Remove="NewFolder\**" />
+    <Content Remove="Areas\Identity\Services\**" />
+    <Content Remove="NewFolder\**" />
+    <EmbeddedResource Remove="Areas\Identity\Services\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="Areas\Identity\Services\**" />
+    <None Remove="NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Identity\Services\" />
-    <Folder Include="NewFolder\" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

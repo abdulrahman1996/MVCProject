@@ -124,6 +124,8 @@ namespace WebApplication2.Areas.Identity.Pages.Account
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
+                        returnUrl = Url.Action("Index", "Home");
+
                         return LocalRedirect(returnUrl);
                     }
                 }
