@@ -1,38 +1,35 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using WebApplication2.Data;
 using WebApplication2.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication2.Services
 {
     public class RoleMangmentService
     {
         private ApplicationDbContext dbContext;
-        public RoleMangmentService(ApplicationDbContext Context)
+        private RoleManager<ApplicationRole> RoleManager;
+        public RoleMangmentService(ApplicationDbContext Context,RoleManager<ApplicationRole> roleManager)
         {
             this.dbContext = Context;
+            this.RoleManager = roleManager;
         }
         public List<ApplicationRole> GetAll()
         {
-            return dbContext.Roles.Where(R=>R.Deleted==false).ToList();
+            return dbContext.Roles.ToList().Where(i => i.Deleted == false).ToList();
         }
-        public void AddRole(ApplicationRole role)
-        {
-            if (role != null)
-            {
-                dbContext.Roles.Add(role);
-                dbContext.SaveChanges();
-            }
-        }
-        public void EditRole(ApplicationRole role)
+
+        public void EditRoleAsync(ApplicationRole role)
         {
             if (role != null)
             {
                 ApplicationRole applicationRole = dbContext.Roles.FirstOrDefault(r => r.Id == role.Id);
                 applicationRole.Name = role.Name;
+               // var result = await RoleManager.UpdateAsync(role);
                 applicationRole.Description = role.Description;
                 dbContext.SaveChanges();
 

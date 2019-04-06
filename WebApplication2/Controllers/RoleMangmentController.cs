@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,20 +12,13 @@ namespace WebApplication2.Controllers
 {
     public class RoleMangmentController : Controller
     {
+        private RoleManager<ApplicationRole> RoleManager;
         private readonly RoleMangmentService Service;
-        public RoleMangmentController(RoleMangmentService service)
+        public RoleMangmentController(RoleMangmentService service, RoleManager<ApplicationRole> roleManager)
         {
             Service = service;
-        }
-        //public RoleMangmentController(ApplicationDbContext dbContext)
-        //{
-        //    this.dbContext = dbContext;
-        //}
-        //public RoleMangmentController(RoleMangmentService service)
-        //{
-        //    Service = service;
-        
-     
+            RoleManager = roleManager;
+        }     
 
         public IActionResult Index()
         {
@@ -39,12 +33,18 @@ namespace WebApplication2.Controllers
         {
             return PartialView();
         }
+        //public async Task<> AddRoleAsync(ApplicationRole role)
+        //{
+        //    var identity = await RoleManager.CreateAsync(role);
+        //    var check = identity.Succeeded;
+        //}
         [HttpPost]
-        public IActionResult Create(ApplicationRole applicationRole)
+        public async  Task <IActionResult> Create(ApplicationRole applicationRole)
         {
-            Service.AddRole(applicationRole);
-            return RedirectToAction("Index");
-            //return PartialView("GetAll", Service.GetAll());
+
+            var identity = await RoleManager.CreateAsync(applicationRole);
+            var check = identity.Succeeded;
+            return PartialView("GetAll", Service.GetAll());
         }
         public IActionResult Edit(string id)
         {
@@ -53,7 +53,7 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public IActionResult Edit(ApplicationRole applicationRole)
         {
-            Service.EditRole(applicationRole);
+            Service.EditRoleAsync(applicationRole);
 
             return PartialView("GetAll", Service.GetAll());
         }
