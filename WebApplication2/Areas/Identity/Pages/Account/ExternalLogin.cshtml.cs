@@ -104,7 +104,7 @@ namespace WebApplication2.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostConfirmationAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? Url.Content("~/Home");
             // Get the information about the user from the external login provider
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
@@ -124,7 +124,7 @@ namespace WebApplication2.Areas.Identity.Pages.Account
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
-                        returnUrl = Url.Action("Index", "Home");
+                      //  returnUrl = Url.Action("Index", "About");
 
                         return LocalRedirect(returnUrl);
                     }
