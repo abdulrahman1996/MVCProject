@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Threading.Tasks;
 using WebApplication2.Data;
@@ -43,11 +44,19 @@ namespace WebApplication2.Services
             res.Deleted = !res.Deleted;
             db.SaveChanges();
         }
-        public async void CreateUser(ApplicationUser User, string password)
+        public void CreateUser(ApplicationUser User)
         {
-            var result = await UserManager.CreateAsync(User, password);
-            var x = result.Succeeded;
+            db.Users.Add(User);
+            db.SaveChanges();
+            //var result = await UserManager.CreateAsync(User, password);
+            //var x = result.Succeeded;
         }
+
+        public async void HashPassword(ApplicationUser user, string password)
+        {
+            var res=await UserManager.AddPasswordAsync(user, password);
+        }
+
 
 
     }

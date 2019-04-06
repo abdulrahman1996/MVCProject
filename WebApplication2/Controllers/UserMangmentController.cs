@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApplication2.Data;
@@ -15,11 +16,12 @@ namespace WebApplication2.Controllers
     public class UserMangmentController : Controller
     {
         private readonly UserMangmentService UserService;
+        private readonly UserManager<ApplicationUser> UserManager;
         // private ApplicationDbContext db;
-        public UserMangmentController(UserMangmentService service)
+        public UserMangmentController(UserMangmentService service, UserManager<ApplicationUser> usermanager)
         {
             UserService = service;
-
+            UserManager = usermanager;
         }
         public IActionResult Index()
         {
@@ -60,9 +62,13 @@ namespace WebApplication2.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(ApplicationUser User, string Password)
+        public async Task<IActionResult> Create(ApplicationUser User, string Password)
         {
-            UserService.CreateUser(User, Password);
+            //UserService.HashPassword(User,Password);
+            //User.PasswordHash = hashedPassword;
+            //UserService.CreateUser(User);
+            User.UserName = User.Email;
+            var res=await UserManager.CreateAsync(User,Password);
             return RedirectToAction("Index");
         }
 

@@ -22,4 +22,29 @@
     <Folder Include="Areas\Identity\Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\assets\css\bootstrap.css" />
+    <None Include="wwwroot\assets\css\facebook.css" />
+    <None Include="wwwroot\assets\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="wwwroot\assets\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\assets\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="wwwroot\assets\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="wwwroot\assets\img\150x150.gif" />
+    <None Include="wwwroot\assets\img\bg_4.jpg" />
+    <None Include="wwwroot\assets\img\bg_5.jpg" />
+    <None Include="wwwroot\assets\img\photo.jpg" />
+    <None Include="wwwroot\assets\img\photo.png" />
+    <None Include="wwwroot\assets\img\photo_002.jpg" />
+    <None Include="wwwroot\assets\img\Thumbs.db" />
+    <None Include="wwwroot\assets\img\uFp_tsTJboUY7kue5XAsGAs28.png" />
+    <None Include="wwwroot\assets\js\bootstrap.js" />
+    <None Include="wwwroot\assets\js\jquery.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Shared\_Layout - Copy.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>
