@@ -3,10 +3,13 @@
 *@
 
 <form asp-action="SearchByUsername" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">
-    <input type="text" placeholder="enter username" name="username">
-    <input type="submit" value="Search" class="btn btn-block">
+    <input type="text" placeholder="enter username" name="username" style="border-radius:5px; width:300px ;height:40px">
+
+    <input type="submit" value="Search" class="btn btn-primary">
 </form>
-<a asp-action="Create">Create User</a>
+<hr>
+<a asp-action="Create" class=" btn btn-primary" >Create New User</a>
+
 <div id="AllData">
     <partial name="GetAll" model="@Model" />
 </div>

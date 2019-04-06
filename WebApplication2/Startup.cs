@@ -83,7 +83,7 @@ namespace WebApplication2
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=UserMangment}/{action=Index}/{id?}");
+                    template: "{controller=Anonymous}/{action=Index}/{id?}");
             });
         }
     }

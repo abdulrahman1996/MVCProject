@@ -1,0 +1,40 @@
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <ul class="nav navbar-nav">
+        <li>
+            <a href="/UserMangment" style="font-weight:bold">User Management</a>
+        </li>
+        <li>
+            <a href="RoleMangment"  style="font-weight:bold">Role Management</a>
+        </li>
+        <li>
+            <a href="AdminSetting"  style="font-weight:bold">Settings</a>
+        </li>
+
+        <li>
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        @*<a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>*@
+                    </li>
+                    <li>
+                        <button type="submit" class="btn btn-link navbar-btn navbar-link" style="color:white;font-weight:bold">Logout</button>
+                    </li>
+                </ul>
+            </form>
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
+        <li><a asp-area="Identity" asp-page="/Account/Register"  style="font-weight:bold">Register</a></li>
+        <li><a asp-area="Identity" asp-page="/Account/Login"  style="font-weight:bold">Login</a></li>
+        <li><a href="~/Anonymous" style="font-weight:bold">About</a></li>
+    </ul>
+}

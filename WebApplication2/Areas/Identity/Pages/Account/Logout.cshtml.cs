@@ -33,7 +33,7 @@ namespace WebApplication2.Areas.Identity.Pages.Account
             _logger.LogInformation("User logged out.");
             if (returnUrl != null)
             {
-                return LocalRedirect("/");
+                return LocalRedirect("~/Anonymous/Index");
             }
             else
             {

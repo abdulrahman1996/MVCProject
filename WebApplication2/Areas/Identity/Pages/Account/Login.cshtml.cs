@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using WebApplication2.Models;
+using WebApplication2.Data;
 
 namespace WebApplication2.Areas.Identity.Pages.Account
 {
@@ -18,11 +19,12 @@ namespace WebApplication2.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        private ApplicationDbContext db;
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, ApplicationDbContext CurrentContext)
         {
             _signInManager = signInManager;
             _logger = logger;
+            db = CurrentContext;
         }
 
         [BindProperty]
@@ -78,7 +80,16 @@ namespace WebApplication2.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    var CurrentUser = db.Users.Where(u => u.Email == Input.Email).FirstOrDefault();
+                    var CurrentRole = db.UserRoles.Where(r => r.UserId == CurrentUser.Id).FirstOrDefault().RoleId;
+                    var CurrentRoleName = db.Roles.Where(r => r.Id == CurrentRole).FirstOrDefault().Name;
+                     
+                    if(CurrentRoleName=="Admin")
+                    {
+                        return LocalRedirect("/UserMangment");
+                    }
+                    else
+                        return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {

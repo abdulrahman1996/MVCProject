@@ -1,35 +1,39 @@
 ﻿@model IEnumerable<WebApplication2.Models.ApplicationUser>
-<table class="table table-hover">
+<table class="table table-hover table-striped table-bordered table-responsive" style="background-color:lightsteelblue">
     <thead>
         <tr>
-            <th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.UserName)
             </th>
-            <th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
-            <th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.Country)
             </th>
-            <th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.City)
             </th>
 
-            <th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.Gender)
             </th>
-            <th>
+            <th style="text-align:center">
+                Roles
+            </th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.Blocked)
             </th>
+            <th></th>
 
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr style="text-align:center">
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
@@ -56,11 +60,13 @@
                 @*@Html.DropDownListFor(x=>item., ViewBag.CityList as SelectList, new { @class = "form-control" })*@
             </div>
 
+            <td></td>
+            <td style="text-align:center">
+                <a  asp-action="blockUser" asp-route-userID="@item.Id" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData" name="userID"><input type="checkbox" checked=@item.Blocked ></a> 
 
-
+            </td>
             <td>
-                <a asp-action="blockUser" asp-route-userID="@item.Id" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData" name="userID"><input type="checkbox" checked=@item.Blocked></a> |
-                <a asp-action="Delete" asp-route-userID="@item.Id" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">Delete</a> |
+                <a asp-action="Delete" asp-route-userID="@item.Id" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData" class="btn btn-danger">Delete</a> 
             </td>
         </tr>
 }
