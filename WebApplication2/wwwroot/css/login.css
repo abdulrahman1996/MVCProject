@@ -1,0 +1,48 @@
+﻿body {
+    background-color:azure;
+}
+.regcont
+{
+    
+  background-color:white;
+}
+.x{
+    text-align:center;
+}
+#cont {
+    border-radius: 2%;
+    background-color: white;
+    width: 70%;
+    height: 45%;
+}
+
+#img {
+    border-radius: 2%;
+    width: 100%;
+}
+#img:hover
+{
+    opacity:0.5;
+    cursor:pointer;
+    text-align:center;
+}
+
+#b{
+    font-weight:bold;
+}
+.m
+{
+    height:40pt;
+ 
+}
+#b
+{
+    border-radius:8pt;
+    width:120pt;
+  
+}
+.in
+{border:none;
+ border-bottom:1pt solid ;
+ border-bottom-color:lightgrey;
+}
