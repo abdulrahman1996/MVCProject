@@ -52,6 +52,7 @@ namespace WebApplication2
 
             services.AddTransient<UserMangmentService, UserMangmentService>();
             services.AddTransient<UserManager<ApplicationUser>>();
+            services.AddTransient<UserHomeService, UserHomeService>();
             services.AddTransient<RoleMangmentService, RoleMangmentService>();
             services.AddTransient<RoleManager<ApplicationUser>>();
             services.AddTransient<ApplicationDbContext, ApplicationDbContext>();

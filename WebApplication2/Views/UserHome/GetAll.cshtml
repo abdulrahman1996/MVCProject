@@ -1,0 +1,28 @@
+﻿@model IEnumerable<WebApplication2.Models.Post>
+@inject UserHomeService userHomeService
+
+<div>
+    @foreach (var item in Model)
+    {
+        <div class="">
+            <a asp-action="" asp-route-id="">
+                <img src="~/images/cover.jpg" width="50" height="50">
+                @item.User.UserName
+            </a>
+            <br>
+            <div style="background-color:azure;height:50px ;width:400px">
+                @Html.DisplayFor(modelItem => item.Content)
+            </div>
+            <label>@userHomeService.LikesCount(item.ID)</label>
+
+            <form asp-action="IncrementLikes" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">
+                <input type="submit" value="like" class="btn" asp-route-postId=@item.ID asp-route-userid=@item.User.Id>
+            </form>
+            <br>
+        </div>
+    }
+</div>
+
+
+
+
