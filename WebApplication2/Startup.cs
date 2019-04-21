@@ -37,6 +37,7 @@ namespace WebApplication2
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            services.AddScoped<FriendsServiece, FriendsServiece>();
             services.AddScoped<AdminSettingService, AdminSettingService>();
             services.AddScoped<ProfileService, ProfileService>();
             services.AddScoped<UserMangmentService, UserMangmentService>();
