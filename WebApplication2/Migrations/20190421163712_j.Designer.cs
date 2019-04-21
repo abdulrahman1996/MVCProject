@@ -10,8 +10,8 @@ using WebApplication2.Data;
 namespace WebApplication2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190421155408_f")]
-    partial class f
+    [Migration("20190421163712_j")]
+    partial class j
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -159,6 +159,10 @@ namespace WebApplication2.Migrations
                     b.Property<bool>("EmailConfirmed");
 
                     b.Property<string>("Gender");
+
+                    b.Property<string>("ImagePath")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue("/users/default-user-image.png");
 
                     b.Property<bool>("LockoutEnabled");
 
