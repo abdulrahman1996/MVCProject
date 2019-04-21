@@ -46,7 +46,7 @@ namespace WebApplication2.Controllers
             Post post = new Post()
             {
                 Content = Content,
-                User = UserManager.GetUserAsync(HttpContext.User).Result,
+                UserID = UserManager.GetUserAsync(HttpContext.User).Result.Id,
                 Timestamp = DateTime.Now,
                 Deleted=false
             };
@@ -54,21 +54,26 @@ namespace WebApplication2.Controllers
             userHomeService.AddUserPost(post);
             return PartialView("GetAll",userHomeService.GetAllPosts());
         }
-
-        [HttpGet]
-        public IActionResult IncrementLikes(int postId)
-        {
-            ViewBag.likes= userHomeService.LikesCount(postId);
-            return PartialView("GetAll", userHomeService.GetAllPosts());
-        }
-
+        
         [HttpPost]
         public IActionResult IncrementLikes(int postId,string userid)
         {
              userHomeService.IncrementLikes(postId, userid);
             return PartialView("GetAll", userHomeService.GetAllPosts());
         }
+        
+        public IActionResult AddComment(string content,int postId,string userid)
+        {
+            userHomeService.AddComment(content, postId, userid);
+            return PartialView("GetAll", userHomeService.GetAllPosts());
 
+        }
+
+        public IActionResult GetAllLikes(int postId)
+        {
+            return PartialView(userHomeService.GetAllLikes(postId));
+
+        }
 
 
 

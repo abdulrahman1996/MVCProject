@@ -19,12 +19,12 @@ namespace WebApplication2.Services
 
         public void AddUserPost(Post Post)
         {
-            db.Add(Post);
+            db.Posts.Add(Post);
             db.SaveChanges();
         }
-        public List<Post>GetAllPosts()
+        public List<Post> GetAllPosts()
         {
-            return db.Posts.Include(usr=>usr.User).Include(likes=>likes.Likes).Include(comm=>comm.Comments).Where(item => item.Deleted != true).ToList();
+            return db.Posts.Include(usr => usr.User).Include(likes => likes.Likes).Include(comm => comm.Comments).Where(item => item.Deleted != true).OrderByDescending(item => item.Timestamp).ToList();
         }
         public int LikesCount(int postid)
         {
@@ -37,7 +37,7 @@ namespace WebApplication2.Services
             var post = db.Posts.Where(item => item.ID == postId).FirstOrDefault();
 
             var checkExist = db.Likes.Where(item => item.Post.ID == postId && item.User.Id == userid).FirstOrDefault();
-            if (checkExist==null)
+            if (checkExist == null)
             {
                 Like newLike = new Like()
                 {
@@ -56,6 +56,27 @@ namespace WebApplication2.Services
 
 
 
+        }
+
+        public void AddComment(string content, int postId, string userid)
+        {
+            var user = db.Users.Where(item => item.Id == userid).FirstOrDefault();
+            var post = db.Posts.Where(item => item.ID == postId).FirstOrDefault();
+            Comment comm = new Comment()
+            {
+                Content = content,
+                User = user,
+                Post = post,
+                Deleted = false
+            };
+            db.Comments.Add(comm);
+            db.SaveChanges();
+        }
+
+        public List<ApplicationUser> GetAllLikes(int postId)
+        {
+            var users = db.Likes.Where(item => item.Post.ID == postId && item.Deleted==false).Select(u=>u.User).ToList();
+            return users;
         }
 
 

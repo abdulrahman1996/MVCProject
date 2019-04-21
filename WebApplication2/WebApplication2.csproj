@@ -6,12 +6,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190401185920_firstMigration.cs" />
+    <Compile Remove="Data\Migrations\20190401185920_firstMigration.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190401190230_secondMigration.cs" />
+    <Compile Remove="Data\Migrations\20190401190230_secondMigration.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190401190425_thirdMigration.cs" />
+    <Compile Remove="Data\Migrations\20190401190425_thirdMigration.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190402201808_secondd.cs" />
+    <Compile Remove="Data\Migrations\20190402201808_secondd.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190402211819_forthMigration.cs" />
+    <Compile Remove="Data\Migrations\20190402211819_forthMigration.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190403154538_m1.cs" />
+    <Compile Remove="Data\Migrations\20190403154538_m1.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190403154542_third.cs" />
+    <Compile Remove="Data\Migrations\20190403154542_third.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190403154722_myy.cs" />
+    <Compile Remove="Data\Migrations\20190403154722_myy.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190420182221_kfayaa.cs" />
+    <Compile Remove="Data\Migrations\20190420182221_kfayaa.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Data\Migrations\" />
     <Folder Include="NewFolder\" />
   </ItemGroup>
 

@@ -1,25 +1,44 @@
 ﻿@model IEnumerable<WebApplication2.Models.Post>
 @inject UserHomeService userHomeService
 
-<div>
+<div class="container">
     @foreach (var item in Model)
     {
-        <div class="">
+
+    <div class="table-bordered" style="background-color:honeydew; width:600px">
+        <a asp-action="" asp-route-id="">
+            <img src="~/images/cover.jpg" width="50" height="50">
+            @item.User.UserName
+
+        </a>
+        <br>
+        <div style="background-color:azure;height:50px ;width:400px">
+            @Html.DisplayFor(modelItem => item.Content)
+        </div>
+        <a asp-action="GetAllLikes" asp-route-postId=@item.ID data-ajax="true" data-ajax-method="get" data-toggle="modal" data-target="#Createmodal" data-ajax-update="#EditData" data-ajax-mode="replace" > @userHomeService.LikesCount(item.ID)</a>
+
+        <br>
+        <a class="btn btn-primary" asp-action="IncrementLikes" asp-route-postId=@item.ID asp-route-userid=@item.User.Id data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">Like</a>
+        <br>
+        <form asp-action="AddComment" asp-route-postId=@item.ID asp-route-userid=@item.User.Id data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">
+            <input type="text" placeholder="enter your comment" width="300" height="30" name="content">
+            <input type="submit" value="Comment" class="btn btn-primary">
+
+        </form>
+        @foreach (var item2 in item.Comments)
+        {
             <a asp-action="" asp-route-id="">
                 <img src="~/images/cover.jpg" width="50" height="50">
                 @item.User.UserName
-            </a>
-            <br>
-            <div style="background-color:azure;height:50px ;width:400px">
-                @Html.DisplayFor(modelItem => item.Content)
-            </div>
-            <label>@userHomeService.LikesCount(item.ID)</label>
 
-            <form asp-action="IncrementLikes" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">
-                <input type="submit" value="like" class="btn" asp-route-postId=@item.ID asp-route-userid=@item.User.Id>
-            </form>
-            <br>
-        </div>
+            </a>
+            <div style="background-color:azure;height:50px ;width:400px">
+                @Html.DisplayFor(modelItem => item2.Content)
+            </div>
+        }
+
+        <hr>
+    </div>
     }
 </div>
 
