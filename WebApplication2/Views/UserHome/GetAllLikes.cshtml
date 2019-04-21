@@ -5,12 +5,18 @@
 
     {
         <div>
-        <a asp-action="" asp-route-id="">
-            <img src="~/images/cover.jpg" width="50" height="50">
-            @item.UserName
+            <a asp-action="" asp-route-id="">
+                <img src="~/images/cover.jpg" width="50" height="50">
+                @item.UserName
 
-        </a>
-          </div>
+            </a>
+        </div>
+    }
+
+    @if (Model == null )
+    {
+        <p>no likes</p>
+
     }
 
 </div>

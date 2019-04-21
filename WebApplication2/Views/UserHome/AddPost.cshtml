@@ -1,17 +1,19 @@
 ﻿@model WebApplication2.Models.Post
 <hr />
+<div class="container">
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="AddPost" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <input asp-for="Content" class="form-control" />
+                <input asp-for="Content" class="form-control" placeholder="what's on your mind..." />
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
            
             <div class="form-group">
-                <input type="submit" value="post" class="btn btn-default" placeholder="what's on your mind..."/>
+                <input type="submit" value="post" class="btn btn-default" style="width:80px"/>
             </div>
         </form>
     </div>
 </div>
+    </div>

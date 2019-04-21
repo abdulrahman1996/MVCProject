@@ -76,6 +76,16 @@ namespace WebApplication2.Controllers
         }
 
 
+        public IActionResult DeletePost(int postid)
+        {
+            userHomeService.DeletePost(postid);
+            return PartialView("GetAll", userHomeService.GetAllPosts());
+        }
 
+        public IActionResult DeleteComment(int commentid)
+        {
+            userHomeService.DeleteComment(commentid);
+            return PartialView("GetAll", userHomeService.GetAllPosts());
+        }
     }
 }

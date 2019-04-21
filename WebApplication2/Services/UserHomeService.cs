@@ -79,6 +79,30 @@ namespace WebApplication2.Services
             return users;
         }
 
+        public void DeletePost(int postid)
+        {
+            var comment = db.Comments.Where(comm => comm.Post.ID == postid).ToList();
+            var like = db.Likes.Where(comm => comm.Post.ID == postid).ToList();
+            
+            if(comment.Count!=0)
+            {
+                comment.ForEach(comm => comm.Deleted = true);
+            }
+
+            if (like.Count != 0)
+            {
+                like.ForEach(lik => lik.Deleted = true);
+            }
+
+            db.Posts.Where(post => post.ID == postid).FirstOrDefault().Deleted=true;
+            db.SaveChanges();
+        }
+
+        public void DeleteComment(int commentid)
+        {
+            db.Comments.Where(comment => comment.ID == commentid).FirstOrDefault().Deleted = true;
+            db.SaveChanges();
+        }
 
     }
 }
