@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApplication2.Migrations
 {
-    public partial class all : Migration
+    public partial class M1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,8 +47,7 @@ namespace WebApplication2.Migrations
                     Country = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
                     Deleted = table.Column<bool>(nullable: false),
-                    Blocked = table.Column<bool>(nullable: false),
-                    ImagePath = table.Column<string>(nullable: true, defaultValue: "/users/default-user-image.png")
+                    Blocked = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
