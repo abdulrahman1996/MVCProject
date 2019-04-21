@@ -24,8 +24,11 @@
     <Compile Remove="Data\Migrations\20190403154542_third.Designer.cs" />
     <Compile Remove="Data\Migrations\20190403154722_myy.cs" />
     <Compile Remove="Data\Migrations\20190403154722_myy.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190420173713_add-default-image.cs" />
+    <Compile Remove="Data\Migrations\20190420174842_add-default-image2.cs" />
     <Compile Remove="Data\Migrations\20190420182221_kfayaa.cs" />
     <Compile Remove="Data\Migrations\20190420182221_kfayaa.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190421161831_all.cs" />
   </ItemGroup>
 
   <ItemGroup>
