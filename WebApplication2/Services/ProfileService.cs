@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication2.Data;
+using WebApplication2.Models;
 
 namespace WebApplication2.Services
 {
@@ -13,6 +14,10 @@ namespace WebApplication2.Services
         {
             db = d;
         }
-        
+        //public  GetCurrentUSer(ApplicationUser user)
+        //{
+        //    var res = db.Users.FirstOrDefault(p => p.Id == user.Id).Id;
+        //    return ;
+        //}
     }
 }
