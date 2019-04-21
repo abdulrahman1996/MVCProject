@@ -11,16 +11,11 @@ namespace WebApplication2.Controllers
 {
     public class ProfileController : Controller
     {
-        private  ProfileService service { get; }
-        private readonly UserManager<ApplicationUser> UserManager;
-
-        public ProfileController(ProfileService s,UserManager<ApplicationUser> manager)
-        {
-            service = s;
-            UserManager = manager;
-        }
+      
         public IActionResult Index()
         {
+       
+          
             return View();
         }
         public IActionResult ImageDiv()
