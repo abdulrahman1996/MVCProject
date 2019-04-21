@@ -14,7 +14,9 @@ namespace WebApplication2.Models
         [Required]
         public string Content { get; set; }
         public DateTime Timestamp { get; set; }
-        [ForeignKey("UserID")]
+        [ForeignKey("User")]
+        public string UserID { get; set; }
+
         public virtual ApplicationUser User { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
