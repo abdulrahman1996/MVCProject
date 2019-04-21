@@ -12,10 +12,15 @@ namespace WebApplication2.Models
     {
         public int ID { get; set; }
         [Required]
-        public int State { get; set; }
-        [ForeignKey("RequesterID")]
+        public FriendRequest State { get; set; }
+        [ForeignKey("Requester")]
+        public string RequesterID { set; get; }
+
         public virtual ApplicationUser Requester { get; set; }
-        [ForeignKey("RequestedID")]
+
+        [ForeignKey("Requested")]
+        public string RequestedID { set; get; }
+
         public virtual ApplicationUser Requested { get; set; }
         public bool Deleted { get; set; }
     }

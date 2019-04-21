@@ -158,6 +158,10 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<string>("Gender");
 
+                    b.Property<string>("ImagePath")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue("/users/default-user-image.png");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");

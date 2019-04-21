@@ -10,14 +10,14 @@ using WebApplication2.Data;
 namespace WebApplication2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190401190425_thirdMigration")]
-    partial class thirdMigration
+    [Migration("20190420173713_add-default-image")]
+    partial class adddefaultimage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -115,6 +115,8 @@ namespace WebApplication2.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<bool>("Deleted");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name")
@@ -140,6 +142,8 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<bool>("Blocked");
+
                     b.Property<string>("City");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -147,12 +151,16 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<string>("Country");
 
+                    b.Property<bool>("Deleted");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
 
                     b.Property<string>("Gender");
+
+                    b.Property<string>("ImagePath");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -199,6 +207,8 @@ namespace WebApplication2.Data.Migrations
                     b.Property<string>("Content")
                         .IsRequired();
 
+                    b.Property<bool>("Deleted");
+
                     b.Property<int?>("PostID");
 
                     b.Property<DateTime>("Timestamp");
@@ -219,6 +229,8 @@ namespace WebApplication2.Data.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Deleted");
 
                     b.Property<string>("RequestedID");
 
@@ -241,6 +253,8 @@ namespace WebApplication2.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Deleted");
+
                     b.Property<int?>("PostID");
 
                     b.Property<string>("UserID");
@@ -262,6 +276,8 @@ namespace WebApplication2.Data.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired();
+
+                    b.Property<bool>("Deleted");
 
                     b.Property<DateTime>("Timestamp");
 

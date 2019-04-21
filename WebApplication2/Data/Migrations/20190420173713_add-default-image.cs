@@ -2,21 +2,21 @@
 
 namespace WebApplication2.Data.Migrations
 {
-    public partial class secondd : Migration
+    public partial class adddefaultimage : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "BlockState",
+            migrationBuilder.AddColumn<string>(
+                name: "ImagePath",
                 table: "AspNetUsers",
-                nullable: false,
-                defaultValue: 0);
+                
+                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "BlockState",
+                name: "ImagePath",
                 table: "AspNetUsers");
         }
     }

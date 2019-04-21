@@ -11,6 +11,15 @@ namespace WebApplication2.Data
     {
         public ApplicationDbContext()
         {
+
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<ApplicationUser>()
+                .Property(u => u.ImagePath)
+                .HasDefaultValue("/users/default-user-image.png");
+
+            base.OnModelCreating(builder);
         }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
