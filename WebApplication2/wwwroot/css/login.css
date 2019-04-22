@@ -1,11 +1,13 @@
 ﻿body {
     background-color:azure;
 }
-.regcont
-{
-    
-  background-color:white;
+.regcont {
+    border-radius: 2%;
+    background-color: white;
+    width: 70%;
+    height: 45%;
 }
+
 .x{
     text-align:center;
 }

@@ -21,7 +21,7 @@ namespace WebApplication2.Controllers
         }
         public IActionResult Index()
         {
-         
+     
             return View(user.GetUserAsync(HttpContext.User).Result);
         }
     }
