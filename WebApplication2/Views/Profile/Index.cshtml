@@ -1,4 +1,4 @@
-﻿
+﻿@model WebApplication2.Models.ApplicationUser
 @{
     ViewData["Title"] = "Index";
     Layout = "_LoginLayout";
@@ -10,8 +10,9 @@
         <div>
             lol
         </div>
-        <div>
-            Mano
+        <div class="table-bordered">
+            <label asp-for="Model.UserName"></label>
+           
         </div>
         <div>
             Abdo

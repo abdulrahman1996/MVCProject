@@ -6,8 +6,8 @@
 }
 
 
-<div class="container regcont ">
-        <div class="row col-xs-7">
+<div id="xx" class="container regcont " style="width:70%" >
+        <div class="row">
             <img class="img-responsive img-rounded " id="img"  src="~/images/bg-01.jpg" />
 
         </div>
@@ -27,18 +27,19 @@
                         <input placeholder="Phone Number" asp-for="Input.phonenumber" class="form-control" />
                         <span asp-validation-for="Input.phonenumber" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-xs-6">
-                        @*  <label asp-for="Input.Password"></label>*@
-                        <input placeholder="Password" asp-for="Input.Password" class="form-control" />
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
-                    </div>
+                    <div class="form-group">
+                        <div class="form-group col-xs-6">
+                            @*  <label asp-for="Input.Password"></label>*@
+                            <input placeholder="Password" asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
 
-                    <div class="form-group col-xs-6">
-                        @* <label asp-for="Input.ConfirmPassword"></label>*@
-                        <input placeholder="Confirm-Password" asp-for="Input.ConfirmPassword" class="form-control" />
-                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        <div class="form-group col-xs-6">
+                            @* <label asp-for="Input.ConfirmPassword"></label>*@
+                            <input placeholder="Confirm-Password" asp-for="Input.ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
                     </div>
-
 
 
                     <div class="form-group col-xs-6">
@@ -59,13 +60,16 @@
                         "Gender",htmlAttributes: new { @class= "dropdown"})
                         <span asp-validation-for="Input.Gender" class="text-danger "></span>
                     </div>
-                    <div>
-                        @* <a href="/Login" class="btn btn-info"></a>*@
-                        <button type="submit" class="btn btn-success center-block">Register</button>
+                    <div class="form-group  ">
+
+                        <button type="submit" class="btn btn-success ">Register</button>
+                        <a class="btn btn-info " href="/Identity/Account/Login" >Sign in</a>
                     </div>
 
                 </form>
+
             </div>
+         
         </div>
     </div>
 
