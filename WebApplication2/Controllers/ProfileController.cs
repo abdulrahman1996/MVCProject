@@ -11,16 +11,23 @@ namespace WebApplication2.Controllers
 {
     public class ProfileController : Controller
     {
-      
+
+        private readonly ProfileService service;
+        private readonly UserManager<ApplicationUser>user;
+        public ProfileController(ProfileService s, UserManager<ApplicationUser> u)
+        {
+            service = s;
+            user = u;
+        }
         public IActionResult Index()
         {
          
-            return View(/*user.GetUserAsync(HttpContext.User).Result*/);
+            return View(user.GetUserAsync(HttpContext.User).Result);
         }
         public IActionResult ImageDiv()
         {
          
-            return View(user.GetUserAsync(HttpContext.User).Result);
+            return PartialView();
         }
     }
 }
