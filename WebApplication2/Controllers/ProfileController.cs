@@ -19,7 +19,8 @@ namespace WebApplication2.Controllers
         }
         public IActionResult ImageDiv()
         {
-            return PartialView();
+         
+            return View(user.GetUserAsync(HttpContext.User).Result);
         }
     }
 }
