@@ -32,6 +32,7 @@ namespace WebApplication2.Controllers
 
         public IActionResult Edit(string id)
         {
+            // ViewBag.iD = id;
             //user.GetUserAsync(HttpContext.User).Result
             return PartialView(user.GetUserAsync(HttpContext.User).Result);
         }
@@ -39,9 +40,18 @@ namespace WebApplication2.Controllers
         public IActionResult Edit(ApplicationUser applicationUser)
         {
 
-            service.EditRoleAsync(applicationUser, user.GetUserAsync(HttpContext.User).Result);
+            service.EditAsync(applicationUser);
 
-            return PartialView("getinfo", user.GetUserAsync(HttpContext.User).Result);
+            return PartialView("getinfo", applicationUser);
+        }
+        //profile/Id
+        [Route("/profile/{id}")]
+
+        public string GetProfile(string id)
+        {
+
+
+            return "kkkkkk";
         }
 
     }

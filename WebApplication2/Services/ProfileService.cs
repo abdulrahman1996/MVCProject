@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,28 +12,37 @@ namespace WebApplication2.Services
     public class ProfileService
     {
         private ApplicationDbContext db;
-        public ProfileService(ApplicationDbContext d)
+        private UserManager<ApplicationUser> UserManager;
+
+        public HttpContext HttpContext { get; set; }
+        public ProfileService(ApplicationDbContext d , UserManager<ApplicationUser> _userManager, IHttpContextAccessor httpContext)
         {
-            db = d;
+            db = d; 
+            UserManager = _userManager;
+            HttpContext = httpContext.HttpContext;
+
         }
-        public void EditRoleAsync(ApplicationUser u, ApplicationUser um)
+        public ApplicationUser EditAsync( ApplicationUser um)
         {
-            if (u != null)
+           
+            ApplicationUser applicationUser=um; 
+            if (um != null)
             {
                
-                ApplicationUser applicationUser = db.Users.FirstOrDefault(r => r.Id == um.Id);
-                applicationUser.UserName = u.UserName;
-                applicationUser.PhoneNumber = u.PhoneNumber;
-                applicationUser.Gender = u.Gender;
-                applicationUser.City = u.City;
-                applicationUser.Country = u.Country;
+                 applicationUser = db.Users.FirstOrDefault(r => r.Id .Equals( um.Id));
+                applicationUser.UserName = um.UserName;
+                applicationUser.PhoneNumber = um.PhoneNumber;
+                applicationUser.Gender = um.Gender;
+                applicationUser.City = um.City;
+                applicationUser.Country = um.Country;
                 db.SaveChanges();
 
             }
+            return applicationUser;
         }
-        //public ApplicationUser GetAll(UserManager<ApplicationUser> user)
+        //public applicationuser getuser()
         //{
-        //    return ;
+        //    return;
         //}
     }
 }

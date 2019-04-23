@@ -8,7 +8,7 @@
 
    
     <div><img style="width:7%" src="~/images/images.png"/>  @Html.DisplayFor(p => p.UserName)</div>
-    <div><img style="width:7%" src="~/images/images.png"/>  @Html.DisplayFor(p => p.Id)</div>
+ @*   <div><img style="width:7%" src="~/images/images.png"/>  @Html.DisplayFor(p => p.Id)</div>*@
 
     <br />
     <div> <img style="width:7%" src="~/images/download.png"/>  @Html.DisplayFor(p => p.Gender)</div>
@@ -23,7 +23,7 @@
     
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="Id" data-ajax="true" class="btn btn-info form-control"style="font-weight:bold" data-ajax-method="Get" data-ajax-update="#EditData" data-ajax-mode="replace" data-ajax-success="fun2()">Edit info</a> 
+    <a asp-action="Edit" asp-route-id="@Model.Id" data-ajax="true" class="btn btn-info form-control"style="font-weight:bold" data-ajax-method="Get" data-ajax-update="#EditData" data-ajax-mode="replace" data-ajax-success="fun2()">Edit info</a> 
 </div>
 
 
