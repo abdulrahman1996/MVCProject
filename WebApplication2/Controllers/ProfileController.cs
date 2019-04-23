@@ -21,8 +21,28 @@ namespace WebApplication2.Controllers
         }
         public IActionResult Index()
         {
-     
+           
             return View(user.GetUserAsync(HttpContext.User).Result);
         }
+        public IActionResult getinfo()
+        {
+           
+            return PartialView (user.GetUserAsync(HttpContext.User).Result);
+        }
+
+        public IActionResult Edit(string id)
+        {
+            //user.GetUserAsync(HttpContext.User).Result
+            return PartialView(user.GetUserAsync(HttpContext.User).Result);
+        }
+        [HttpPost]
+        public IActionResult Edit(ApplicationUser applicationUser)
+        {
+
+            service.EditRoleAsync(applicationUser, user.GetUserAsync(HttpContext.User).Result);
+
+            return PartialView("getinfo", user.GetUserAsync(HttpContext.User).Result);
+        }
+
     }
 }
