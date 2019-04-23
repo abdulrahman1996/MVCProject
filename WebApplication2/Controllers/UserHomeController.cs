@@ -39,8 +39,10 @@ namespace WebApplication2.Controllers
 
         public IActionResult GetAll()
         {
+
             string CurrentUserID = UserManager.GetUserAsync(HttpContext.User).Result.Id;
 
+            ViewBag.CurrentUserID = CurrentUserID;
             return PartialView(userHomeService.GetAllPosts(CurrentUserID));
         }
         public IActionResult AddPost()
@@ -52,6 +54,7 @@ namespace WebApplication2.Controllers
         public IActionResult AddPost(string Content)
         {
             string CurrentUserID = UserManager.GetUserAsync(HttpContext.User).Result.Id;
+            ViewBag.CurrentUserID = CurrentUserID;
 
             Post post = new Post()
             {
@@ -65,6 +68,7 @@ namespace WebApplication2.Controllers
             return PartialView("GetAll",userHomeService.GetAllPosts(CurrentUserID));
         }
         
+        //change current userid to userid
         [HttpPost]
         public IActionResult IncrementLikes(int postId,string userid)
         {
@@ -76,10 +80,11 @@ namespace WebApplication2.Controllers
         
         public IActionResult AddComment(string content,int postId,string userid)
         {
-            string CurrentUserID = UserManager.GetUserAsync(HttpContext.User).Result.Id;
-
+            //string CurrentUserID = UserManager.GetUserAsync(HttpContext.User).Result.Id;
+            ViewBag.CurrentUserID = userid;
             userHomeService.AddComment(content, postId, userid);
-            return PartialView("GetAll", userHomeService.GetAllPosts(CurrentUserID));
+
+            return PartialView("GetAll", userHomeService.GetAllPosts(userid));
 
         }
 
@@ -93,14 +98,16 @@ namespace WebApplication2.Controllers
         public IActionResult DeletePost(int postid)
         {
             string CurrentUserID = UserManager.GetUserAsync(HttpContext.User).Result.Id;
+            ViewBag.CurrentUserID = CurrentUserID;
 
             userHomeService.DeletePost(postid);
             return PartialView("GetAll", userHomeService.GetAllPosts(CurrentUserID));
         }
 
-        public IActionResult DeleteComment(int commentid)
+        public IActionResult DeleteComment(int commentid, string userid)
         {
             string CurrentUserID = UserManager.GetUserAsync(HttpContext.User).Result.Id;
+            ViewBag.CurrentUserID = userid;
 
             userHomeService.DeleteComment(commentid);
             return PartialView("GetAll", userHomeService.GetAllPosts(CurrentUserID));
@@ -115,6 +122,7 @@ namespace WebApplication2.Controllers
         public IActionResult EditPost(Post post)
         {
             string CurrentUserID = UserManager.GetUserAsync(HttpContext.User).Result.Id;
+            ViewBag.CurrentUserID = CurrentUserID;
 
             userHomeService.EditPost(post);
             return PartialView("GetAll", userHomeService.GetAllPosts(CurrentUserID));
@@ -131,7 +139,7 @@ namespace WebApplication2.Controllers
         public IActionResult EditComment(Comment comment)
         {
             string CurrentUserID = UserManager.GetUserAsync(HttpContext.User).Result.Id;
-
+            ViewBag.CurrentUserID = CurrentUserID;
             userHomeService.EditComment(comment);
             return PartialView("GetAll", userHomeService.GetAllPosts(CurrentUserID));
 
