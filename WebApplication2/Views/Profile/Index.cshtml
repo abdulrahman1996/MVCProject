@@ -1,7 +1,6 @@
-﻿@model WebApplication2.Models.ApplicationUser
-@{
+﻿@{
     ViewData["Title"] = "Index";
-    Layout = "_LoginLayout";
+    //Layout = "_LoginLayout";
 }
 
 <div id="MyGetAll">
@@ -9,15 +8,27 @@
 </div>
 <div class="container">
     <div class="col-xs-4 bg-info">
-
-        @*<div class="table-bordered">
-            <label asp-for="Model.UserName"></label>
-           
-        </div>*@
-        
+        <div>
+            lol
+        </div>
+        <div class="table-bordered">
+            <label asp-for=@Model.UserName></label>
+          
+        </div>
+        <div>
+            Abdo
+        </div>
     </div>
     <div class="col-xs-8 bg-danger">
         posts
     </div>
 
 </div>
+@section Scripts
+    {
+    <script>
+        function fun2() {
+            $("#EditModal").modal("toggle")
+        }
+    </script>
+}

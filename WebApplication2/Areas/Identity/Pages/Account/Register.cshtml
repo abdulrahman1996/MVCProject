@@ -23,6 +23,11 @@
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        @*<label asp-for="Input.Email"></label>*@
+                        <input placeholder="UserName" asp-for="Input.UserName" class="form-control" />
+                        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
                         @*    <label asp-for="Input.phonenumber"></label>*@
                         <input placeholder="Phone Number" asp-for="Input.phonenumber" class="form-control" />
                         <span asp-validation-for="Input.phonenumber" class="text-danger"></span>
@@ -63,7 +68,7 @@
                     <div class="form-group  ">
 
                         <button type="submit" class="btn btn-success ">Register</button>
-                        <a class="btn btn-info " href="/Identity/Account/Login" >Sign in</a>
+                        <a class="btn btn-info " href="/Identity/Account/Login">Sign in</a>
                     </div>
 
                 </form>

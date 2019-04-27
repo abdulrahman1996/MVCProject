@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,15 +12,19 @@ namespace WebApplication2.Services
     public class ProfileService
     {
         private ApplicationDbContext db;
-        public ProfileService(ApplicationDbContext d)
+        private UserManager<ApplicationUser> UserManager;
+
+        public HttpContext HttpContext { get; set; }
+        public ProfileService(ApplicationDbContext d , UserManager<ApplicationUser> _userManager, IHttpContextAccessor httpContext)
         {
-            db = d;
+            db = d; 
+            UserManager = _userManager;
+            HttpContext = httpContext.HttpContext;
+
         }
-      
         //public  GetCurrentUSer(ApplicationUser user)
         //{
-        //    var res = db.Users.FirstOrDefault(p => p.Id == user.Id).Id;
-        //    return ;
+        //    return;
         //}
     }
 }
