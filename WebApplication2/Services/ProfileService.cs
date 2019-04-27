@@ -14,6 +14,7 @@ namespace WebApplication2.Services
         {
             db = d;
         }
+      
         //public  GetCurrentUSer(ApplicationUser user)
         //{
         //    var res = db.Users.FirstOrDefault(p => p.Id == user.Id).Id;

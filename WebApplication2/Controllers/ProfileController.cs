@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Models;
 using WebApplication2.Services;
@@ -14,20 +18,37 @@ namespace WebApplication2.Controllers
 
         private readonly ProfileService service;
         private readonly UserManager<ApplicationUser>user;
-        public ProfileController(ProfileService s, UserManager<ApplicationUser> u)
+        private readonly IHostingEnvironment hosting; 
+        public ProfileController(ProfileService s, UserManager<ApplicationUser> u,IHostingEnvironment h)
         {
             service = s;
             user = u;
+            hosting = h;
         }
         public IActionResult Index()
         {
-         
+            ApplicationUser u = user.GetUserAsync(HttpContext.User).Result;
+
             return View(user.GetUserAsync(HttpContext.User).Result);
         }
-        public IActionResult ImageDiv()
+        [HttpGet]
+        public IActionResult ImageDiv(/*IFormFile file*/)
         {
-         
-            return PartialView();
+           
+           return PartialView(user.GetUserAsync(HttpContext.User).Result);
+        }
+        [HttpPost]
+        public IActionResult ImagesaveAsync()
+        {
+            var file = Request.Form.Files["imageUploadForm"];
+            var fileName = Path.GetFileName(file.FileName);
+
+            var path = Path.Combine(hosting.WebRootPath,"images" , fileName);
+            file.CopyTo(new FileStream(path, FileMode.Create));
+            ApplicationUser u = user.GetUserAsync(HttpContext.User).Result;
+            u.ImagePath = path;
+            user.UpdateAsync(u);
+            return PartialView("ImageDiv");
         }
     }
 }
