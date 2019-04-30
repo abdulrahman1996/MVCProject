@@ -22,6 +22,24 @@ namespace WebApplication2.Services
             HttpContext = httpContext.HttpContext;
 
         }
+        public ApplicationUser EditAsync(ApplicationUser um)
+        {
+
+            ApplicationUser applicationUser = um;
+            if (um != null)
+            {
+
+                applicationUser = db.Users.FirstOrDefault(r => r.Id.Equals(um.Id));
+                applicationUser.UserName = um.UserName;
+                applicationUser.PhoneNumber = um.PhoneNumber;
+                applicationUser.Gender = um.Gender;
+                applicationUser.City = um.City;
+                applicationUser.Country = um.Country;
+                db.SaveChanges();
+
+            }
+            return applicationUser;
+        }
         //public  GetCurrentUSer(ApplicationUser user)
         //{
         //    return;

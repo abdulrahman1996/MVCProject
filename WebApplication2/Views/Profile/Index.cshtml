@@ -3,17 +3,16 @@
     //Layout = "_LoginLayout";
 }
 
-<div id="MyGetAll">
-    <partial name="ImageDiv" model="@Model"/>
-</div>
+
 <div class="container">
     <div class="col-xs-4 bg-info">
-        <div>
-            lol
+        <div id="MyGetAll">
+            <partial name="ImageDiv" model="@Model" />
         </div>
-        <div class="table-bordered">
-            <label asp-for=@Model.UserName></label>
-          
+        <div>
+            <div id="MyInFoGetAll">
+                <partial name="getinfo" model="@Model" />
+            </div>
         </div>
         <div>
             Abdo
@@ -24,6 +23,25 @@
     </div>
 
 </div>
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="EditData">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts
     {
     <script>

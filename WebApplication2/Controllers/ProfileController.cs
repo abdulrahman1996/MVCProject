@@ -30,5 +30,35 @@ namespace WebApplication2.Controllers
      
             return View(user.GetUserAsync(HttpContext.User).Result);
         }
+        public IActionResult getinfo()
+        {
+
+            return PartialView(user.GetUserAsync(HttpContext.User).Result);
+        }
+
+        public IActionResult Edit(string id)
+        {
+            // ViewBag.iD = id;
+            //user.GetUserAsync(HttpContext.User).Result
+            return PartialView(user.GetUserAsync(HttpContext.User).Result);
+        }
+        [HttpPost]
+        public IActionResult Edit(ApplicationUser applicationUser)
+        {
+
+            service.EditAsync(applicationUser);
+
+            return PartialView("getinfo", applicationUser);
+        }
+        //profile/Id
+        [Route("/profile/{id}")]
+
+        public string GetProfile(string id)
+        {
+
+
+            return "kkkkkk";
+        }
+
     }
 }
