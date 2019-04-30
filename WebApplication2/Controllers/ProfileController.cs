@@ -30,5 +30,25 @@ namespace WebApplication2.Controllers
      
             return View(user.GetUserAsync(HttpContext.User).Result);
         }
+
+        [HttpGet]
+        public IActionResult ImageDiv(/*IFormFile file*/)
+        {
+
+            return PartialView(user.GetUserAsync(HttpContext.User).Result);
+        }
+        [HttpPost]
+        public IActionResult Imagesave()
+        {
+            var file = Request.Form.Files["imageUploadForm"];
+            var fileName = Path.GetFileName(file.FileName);
+            var pathImage = Path.Combine("images", fileName);
+            var path = Path.Combine(hosting.WebRootPath, "images", fileName);
+            file.CopyTo(new FileStream(path, FileMode.Create));
+            ApplicationUser u = user.GetUserAsync(HttpContext.User).Result;
+            u.ImagePath = pathImage;
+            user.UpdateAsync(u);
+            return PartialView("ImageDiv");
+        }
     }
 }
