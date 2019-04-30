@@ -141,5 +141,11 @@ namespace WebApplication2.Services
         {
             return db.Users.Where(u => u.Id == userId).Select(user => user.UserName).FirstOrDefault();
         }
+
+        public List<Post>GetOnlyUserPosts(string userId)
+        {
+            var res=db.Posts.Where(p => p.UserID == userId).ToList();
+            return res;
+        }
     }
 }

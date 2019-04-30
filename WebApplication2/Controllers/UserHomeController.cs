@@ -23,6 +23,12 @@ namespace WebApplication2.Controllers
             signInManager = SignInManager;
 
         }
+        public IActionResult GetOnlyUserPosts(string userId)
+        {
+           // userId=
+            ViewBag.CurrentUserID = UserManager.GetUserAsync(HttpContext.User).Result.Id;
+            return PartialView("GetAll", userHomeService.GetOnlyUserPosts(userId));
+        }
 
         public  IActionResult Index()
         {
