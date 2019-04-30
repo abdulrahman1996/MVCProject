@@ -1,12 +1,17 @@
 ﻿body {
     background-color:azure;
 }
-.regcont
-{
-    
-  background-color:white;
+#xx {
+    border-radius: 2%;
+    width: 70%;
+    height: 45%;
+    background-color: white;
 }
-.x{
+
+   
+   
+ 
+    .x{
     text-align:center;
 }
 #cont {
@@ -18,7 +23,7 @@
 
 #img {
     border-radius: 2%;
-    width: 100%;
+    width: 70%;
 }
 #img:hover
 {
