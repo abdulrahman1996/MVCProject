@@ -25,8 +25,8 @@ namespace WebApplication2.Controllers
         }
         public IActionResult GetOnlyUserPosts(string userId)
         {
-           // userId=
             ViewBag.CurrentUserID = UserManager.GetUserAsync(HttpContext.User).Result.Id;
+            ViewBag.CurrentUserUserName = userHomeService.GetUserName(userId);
             return PartialView("GetAll", userHomeService.GetOnlyUserPosts(userId));
         }
 

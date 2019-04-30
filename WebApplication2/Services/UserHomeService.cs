@@ -144,7 +144,7 @@ namespace WebApplication2.Services
 
         public List<Post>GetOnlyUserPosts(string userId)
         {
-            var res=db.Posts.Where(p => p.UserID == userId).ToList();
+            var res=db.Posts.Include(usr => usr.User).Include(likes => likes.Likes).Include(comm => comm.Comments).Where(p => p.UserID == userId).ToList();
             return res;
         }
     }
