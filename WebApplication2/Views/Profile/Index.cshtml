@@ -7,11 +7,11 @@
 <div class="container">
     <div class="col-xs-4 bg-info">
         @*<div id="MyGetAll">
-            <partial name="ImageDiv" model=ViewBag.img />
-        </div>*@
+                <partial name="ImageDiv" model=ViewBag.img />
+            </div>*@
         <div>
             <div id="MyInFoGetAll">
-                <partial name="getinfo" model=ViewBag.user/>
+                <partial name="getinfo" model=ViewBag.user />
             </div>
         </div>
         <div>
@@ -47,7 +47,6 @@
 </div>
 
 
-
 <div id="Createmodal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -60,7 +59,9 @@
 
                 </div>
             </div>
-
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>
@@ -77,11 +78,12 @@
 
                 </div>
             </div>
-
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>
-
 
 
 @section Scripts
@@ -95,8 +97,16 @@
             $("#Createmodal").modal("toggle");
         }
 
-        //function successEdit() {
-        //    $("#EditmodalPosts").modal("toggle");
-        //}
+        function openModalLikes() {
+            $("#Createmodal").modal("toggle");
+
+        }
+
+        function successEdit() {
+            $("#EditModal").modal("toggle");
+        }
+            //function successEdit() {
+            //    $("#EditmodalPosts").modal("toggle");
+            //}
     </script>
 }

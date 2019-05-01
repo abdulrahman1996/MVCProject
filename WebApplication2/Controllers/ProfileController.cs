@@ -110,6 +110,7 @@ namespace WebApplication2.Controllers
         public IActionResult IncrementLikes(int postId, string userid)
         {
             string CurrentUserID = user.GetUserAsync(HttpContext.User).Result.Id;
+            ViewBag.CurrentUserID = userid;
 
             userHomeService.IncrementLikes(postId, userid);
             return PartialView("GetAll", service.GetAllUserPosts(CurrentUserID));
