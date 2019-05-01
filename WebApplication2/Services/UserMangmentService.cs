@@ -57,7 +57,10 @@ namespace WebApplication2.Services
             var res=await UserManager.AddPasswordAsync(user, password);
         }
 
+        //public void UpdateUserRole(string)
+        //{
 
+        //}
 
     }
 }

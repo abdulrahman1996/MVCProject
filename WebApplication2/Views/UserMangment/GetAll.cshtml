@@ -54,13 +54,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Gender)
             </td>
-           
-            <div class="col-md-10">
-                @*@Html.DropDownList("AllRoles",null, htmlAttributes: new { @class = "form-control" })*@
-                @*@Html.DropDownListFor(x=>item., ViewBag.CityList as SelectList, new { @class = "form-control" })*@
-            </div>
+   
+            <td>
+                <div class="col-md-10">
+                    <form asp-action="UpdatePost" data-ajax="true" data-ajax-method="Post" data-ajax-update="#MyGetAll">
+                        @*<select>
+                            @foreach(var item in )
 
-            <td></td>
+
+                        </select>*@
+                        </form>
+                </div>
+            </td>
             <td style="text-align:center">
                 <a  asp-action="blockUser" asp-route-userID="@item.Id" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData" name="userID"><input type="checkbox" checked=@item.Blocked ></a> 
 
@@ -70,5 +75,5 @@
             </td>
         </tr>
 }
-    </tbody>
-</table>
+   
+

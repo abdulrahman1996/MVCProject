@@ -26,14 +26,14 @@ namespace WebApplication2.Controllers
         public IActionResult Index()
         {
             //var res = db.Roles.ToList();
-            ViewBag.AllRoles = UserService.GetAll();
+            ViewBag.AllRoles = new SelectList(UserService.GetAllRoles(), "Id", "Name");
             return View(UserService.GetAll());
         }
         public IActionResult GetAll()
         {
 
             // ViewBag.AllRoles = res;
-            // ViewBag.AllRoles = new SelectList(UserService.GetAllRoles(), "Id", "Name");
+            ViewBag.AllRoles = new SelectList(UserService.GetAllRoles(), "Id", "Name");
 
             return PartialView(UserService.GetAll());
         }
@@ -70,6 +70,12 @@ namespace WebApplication2.Controllers
             User.UserName = User.Email;
             var res=await UserManager.CreateAsync(User,Password);
             return RedirectToAction("Index");
+        }
+
+
+        public IActionResult UpdateRole(string selectedRoleId)
+        {
+            return PartialView("GetAll", UserService.GetAll());
         }
 
 

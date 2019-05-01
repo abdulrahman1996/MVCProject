@@ -11,7 +11,7 @@
     @foreach (var item in Model)
     {
 
-    <div style="width:600px;background-color: #fff ;border-radius:5px">
+    <div style="width:450px;background-color: #fff ;border-radius:20px">
         <a asp-controller="Profile" asp-route-targetUserName=@item.User.UserName>
             <img src=@item.User.ImagePath class="img-circle">
             @item.User.UserName
@@ -21,14 +21,14 @@
         <div style="float:right">
             @if (item.UserID == ViewBag.CurrentUserID)
             {
-                <a asp-controller="Profile" asp-action="EditPost" asp-route-postId=@item.ID data-ajax="true" data-ajax-method="get" data-ajax-update="#EditData" data-ajax-mode="replace" class="btn btn-success" data-ajax-success="successEdit()">Edit</a>
-                <a asp-controller="Profile" asp-action="DeletePost" asp-route-postid=@item.ID data-ajax="true" data-ajax-method="get" data-ajax-update="#AllData">Delete</a>
+                <a style="font-weight:bold" class="bg-success" asp-controller="Profile" asp-action="EditPost" asp-route-postId=@item.ID data-ajax="true" data-ajax-method="get" data-ajax-update="#EditData" data-ajax-mode="replace" class="btn btn-success" data-ajax-success="successEdit()">Edit</a>
+                <a style="font-weight:bold"class="bg-danger" asp-controller="Profile" asp-action="DeletePost" asp-route-postid=@item.ID data-ajax="true" data-ajax-method="get" data-ajax-update="#AllData">Delete</a>
             }
         </div>
 
         <br>
         <br>
-        <div style="height:50px ;width:400px">
+        <div style="height:20px ;width:400px">
             @Html.DisplayFor(modelItem => item.Content)
         </div>
 
@@ -43,7 +43,7 @@
 
         </form>
         <br>
-        <table class="table-bordered">
+        <table class=" table table-condensed table-hover" style="width:400px;height:5px">
 
 
             @foreach (var item2 in item.Comments)
@@ -58,15 +58,18 @@
                                 @item2.User.UserName
 
                             </a>
+                            <div style="border:2px unset; border-right:15px">
+                                <div class="img-thumbnail">
+                            @Html.DisplayFor(modelItem => item2.Content)
+                                    </div>
+                             </div>
+
                             @if (item2.User.Id == ViewBag.CurrentUserID)
                             {
-                                <a asp-controller="Profile" asp-action="EditComment" asp-route-commentid=@item2.ID asp-route-userid=@item2.User.Id data-ajax="true" data-ajax-method="get" data-ajax-update="#EditData" data-ajax-mode="replace" class="btn btn-success" data-ajax-success="successEdit()">Edit</a>
-                                <a asp-controller="Profile" asp-action="DeleteComment" asp-route-commentid=@item2.ID asp-route-userid=@item2.User.Id data-ajax="true" data-ajax-method="get" data-ajax-update="#AllData">Delete</a>
+                                <a style="font-weight:bold"class="bg-success"  asp-controller="Profile" asp-action="EditComment" asp-route-commentid=@item2.ID asp-route-userid=@item2.User.Id data-ajax="true" data-ajax-method="get" data-ajax-update="#EditData" data-ajax-mode="replace"  data-ajax-success="successEdit()">Edit</a>
+                                <a style="font-weight:bold" class="bg-danger" asp-controller="Profile" asp-action="DeleteComment" asp-route-commentid=@item2.ID asp-route-userid=@item2.User.Id data-ajax="true" data-ajax-method="get" data-ajax-update="#AllData">Delete</a>
                             }
                             <br />
-                            <div style="height:50px ;width:400px">
-                                @Html.DisplayFor(modelItem => item2.Content)
-                            </div>
                         </td>
                     </tr>
 
