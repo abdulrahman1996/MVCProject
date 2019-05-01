@@ -53,43 +53,38 @@ namespace WebApplication2.Services
         public IEnumerable<frindRequestDetail> GetAllFrinds(string id="")
         {
 
+
             if (id.Equals(""))
                 id = LogginedId;
 
-            var users = db.Users.ToList();
+            var users = db.Users
+                .Where(u => !u.Id.Equals(LogginedId))
+                .ToList();
                               
 
             List<frindRequestDetail> frinds = new List<frindRequestDetail>();
 
             var friends = db.FriendRequests
                 .Where(f =>( f.RequesterID == id || f.RequestedID == id ) && f.State== FriendState.Friend)
-                .Where(f=> !f.Deleted);
+                .Where(f=> !f.Deleted).ToList();
 
             foreach (var item in users)
             {
 
-                var r = friends.FirstOrDefault(o => o.RequesterID == item.Id || o.RequestedID == item.Id);
+                var r = friends.
+                            Where(o => o.RequesterID == item.Id  || o.RequestedID == item.Id)
+                            .Where(n => !n.Deleted).FirstOrDefault();
 
 
-                if (r == null)
-                    frinds.Add(new frindRequestDetail()
-                    {
-                        Id = item.Id,
-                        Email = item.Email,
-                        City = item.City,
 
-                        ImagePath = item.ImagePath,
-                        State = FriendState.NotFriend,
-                        UserName = item.UserName
-                    });
-                else
+               if(r!=null)
                     frinds.Add(new frindRequestDetail()
                     {
                         Id = item.Id,
                         Email = item.Email,
                         City = item.City,
                         ImagePath = item.ImagePath,
-                        State = r.State,
+                        State = FriendState.Friend,
                         UserName = item.UserName
                     });
 
@@ -181,8 +176,29 @@ namespace WebApplication2.Services
 
             return FriendState.Requester;
         }
+        public FriendState GetFriendShipState(string id)
+        {
+           var req =  db.FriendRequests
+                .Where(r => (r.RequestedID.Equals(LogginedId) && r.RequesterID.Equals(id)) || (r.RequesterID.Equals(LogginedId) && r.RequestedID.Equals(id)))
+                .Where(r => !r.Deleted )
+                .FirstOrDefault();
 
-        
+
+            
+            if (req == null)
+                return FriendState.NotFriend;
+
+            if (req.State.Equals(FriendState.Friend))
+                return FriendState.Friend;
+
+            if (req.RequesterID.Equals(LogginedId))
+               return FriendState.Requester;
+
+            return FriendState.Requested;
+                
+        }
+
+
 
         public void AcceptRequest(string id)
         {

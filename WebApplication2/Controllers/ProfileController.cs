@@ -29,6 +29,7 @@ namespace WebApplication2.Controllers
         }
         public IActionResult Index()
         {
+
             ViewBag.friendes = friendsServiece.GetAllFrinds();
             ViewBag.user = user.GetUserAsync(HttpContext.User).Result;
             return View(user.GetUserAsync(HttpContext.User).Result);
