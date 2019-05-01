@@ -50,9 +50,11 @@ namespace WebApplication2.Services
 
 
 
-        public IEnumerable<frindRequestDetail> GetAllFrinds()
+        public IEnumerable<frindRequestDetail> GetAllFrinds(string id="")
         {
 
+            if (id.Equals(""))
+                id = LogginedId;
 
             var users = db.Users.ToList();
                               
@@ -60,7 +62,8 @@ namespace WebApplication2.Services
             List<frindRequestDetail> frinds = new List<frindRequestDetail>();
 
             var friends = db.FriendRequests
-                .Where(f =>( f.RequesterID == LogginedId || f.RequestedID == LogginedId ) && f.State== FriendState.Friend);
+                .Where(f =>( f.RequesterID == id || f.RequestedID == id ) && f.State== FriendState.Friend)
+                .Where(f=> !f.Deleted);
 
             foreach (var item in users)
             {

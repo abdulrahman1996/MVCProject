@@ -18,16 +18,18 @@ namespace WebApplication2.Controllers
 
         private readonly ProfileService service;
         private readonly UserManager<ApplicationUser>user;
-        private readonly IHostingEnvironment hosting; 
-        public ProfileController(ProfileService s, UserManager<ApplicationUser> u,IHostingEnvironment h)
+        private readonly IHostingEnvironment hosting;
+        private readonly FriendsServiece friendsServiece;
+        public ProfileController(ProfileService s, UserManager<ApplicationUser> u,IHostingEnvironment h  , FriendsServiece f)
         {
             service = s;
+            friendsServiece = f;
             user = u;
             hosting = h;
         }
         public IActionResult Index()
         {
-     
+            ViewBag.friendes = friendsServiece.GetAllFrinds();
             return View(user.GetUserAsync(HttpContext.User).Result);
         }
         public IActionResult getinfo()
