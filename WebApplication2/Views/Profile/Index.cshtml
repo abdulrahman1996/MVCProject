@@ -3,6 +3,34 @@
     //Layout = "_LoginLayout";
 }
 
+<style>
+
+
+    .imgcontainer {
+        position: relative;
+        text-align: center;
+        color: white;
+        
+    }
+     .imgcontainer :hover {
+        opacity:0.5;
+        
+    }
+
+
+
+
+    .top-left {
+        position: absolute;
+        top: 4pt;
+        left: 16pt;
+        color: grey;
+    }
+    .fimg{
+        height:70pt;
+        image-orientation:unset;
+    }
+</style>
 
 <div class="container">
     <div class="col-xs-4 bg-info">
@@ -14,8 +42,21 @@
                 <partial name="getinfo" model="@ViewBag.user" />
             </div>
         </div>
-        <div>
-            Abdo
+        <br />
+        <br />
+        <div class="   row">
+            @foreach (var friend in ViewBag.friendes)
+            {
+            <a asp-action="" asp-route-id=@friend.Id>
+
+                <div class=" col-lg-4 imgcontainer">
+
+                    <img src=@String.Concat("/images" , friend.ImagePath ) class="  fimg " />
+                    <div class="top-left">@friend.UserName</div>
+                </div>
+            </a> 
+            }
+
         </div>
     </div>
     <div class="col-xs-8 bg-danger">
