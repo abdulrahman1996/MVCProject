@@ -25,8 +25,8 @@ namespace WebApplication2.Services
         public List<Post> GetAllPosts(string currentUserId)
         {
             //   var FriendId = db.FriendRequests.Where(f => f.Requester.Id == currentUserId || f.Requested.Id == currentUserId).Select(u=>new { requester=u.Requester,requested=u.Requested}).ToList();
-            var IDList1 = db.FriendRequests.Where(f => f.Requester.Id == currentUserId && f.State==1).Select(u=>u.Requested.Id).ToList();
-            var IDList2 = db.FriendRequests.Where(f => f.Requested.Id == currentUserId && f.State==1).Select(u => u.Requester.Id).ToList();
+            var IDList1 = db.FriendRequests.Where(f => f.Requester.Id == currentUserId && f.State==Enums.FriendState.Friend).Select(u=>u.Requested.Id).ToList();
+            var IDList2 = db.FriendRequests.Where(f => f.Requested.Id == currentUserId && f.State== Enums.FriendState.Friend).Select(u => u.Requester.Id).ToList();
 
             var AllIDs = IDList1.Union(IDList2).Distinct().ToList();
            if(!AllIDs.Contains(currentUserId))

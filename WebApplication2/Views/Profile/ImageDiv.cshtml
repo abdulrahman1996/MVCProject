@@ -1,0 +1,121 @@
+﻿@model WebApplication2.Models.ApplicationUser
+
+
+<style>
+    #user {
+        position: absolute;
+        width: 140px;
+        height: 140px;
+        border-radius: 70px;
+    }
+
+    #lower_right {
+        background-color: aqua;
+        position: relative;
+        top: 100px;
+        float: right;
+        background-image: url(../../wwwroot/images/camera.ico)
+    }
+
+    #fileIn {
+        display: none;
+    }
+
+    #icon {
+        border-radius: 20px;
+        width: 20px;
+        height: 20px;
+    }
+
+    #container {
+        width: 120px;
+    }
+
+    .image-upload > input {
+        visibility: hidden;
+        width: 0;
+        height: 0
+    }
+
+    .topIn {
+        top: 100px;
+    }
+</style>
+<div id="container" class="container col-xs-6">
+
+    @*<div id="lower_right">*@
+    @*<img src="~/images/camera.ico" id="icon" />*@
+    @*<input type="file" id="fileIn" accept="image/x-png,image/gif,image/jpeg">*@
+
+    @if (String.IsNullOrEmpty(Model.ImagePath))
+    {
+
+        Model.ImagePath = "~/images/users/default-user-image.png";
+        @*<img id="user" src="@Url.Content(Model.ImagePath)" />*@
+
+    }
+    <img id="user" src="@Url.Content(Model.ImagePath)" />
+   
+    <span class="image-upload col-xs-6 col-xs-offset-9 topIn">
+        <label for="file-input">
+            <img src="~/images/icon.png" id="icon" style="pointer-events: none" />
+        </label>
+        <input id="file-input" onchange="readImage(event)" type="file"/>
+    </span>
+
+</div>
+
+
+<script>
+    //selectedFile = document.getElementById('file-input');
+    //selectedFile.addEventListener("change", function (data) {
+         
+    //});
+    
+        function readImage(event) {
+            
+            var reader = new FileReader();
+            var imgtag = document.getElementById("user");
+            imgtag.title = event.target.files[0].name;
+            var x = event.target.files[0];
+
+            //
+            var formData = new FormData();
+            reader.onload = function (event) {
+                // document["user"].src = event.target.result;
+                imgtag.src = event.target.result;
+                var fileContent = event.target.result;
+
+                console.log(fileContent);
+                var file = document.getElementById("user");
+                formData.append("imageUploadForm", x);
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Imagesave")',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    dataType:'json'                    
+                }).done(function () { console("yes"); });
+               /* var file = event.target.result;
+                
+                var fd = new FormData();
+                fd.append("files", file);
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/Profile/ImageDiv", false);
+                xhr.send(fd);*/
+
+            };
+            reader.readAsDataURL(event.target.files[0]);
+            
+        }
+    
+</script>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

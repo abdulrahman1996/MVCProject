@@ -37,7 +37,9 @@ namespace WebApplication2
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            services.AddScoped<FriendsServiece, FriendsServiece>();
             services.AddScoped<AdminSettingService, AdminSettingService>();
+            services.AddScoped<ProfileService, ProfileService>();
             services.AddScoped<UserMangmentService, UserMangmentService>();
             services.AddScoped<RoleMangmentService, RoleMangmentService>();
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -51,6 +53,7 @@ namespace WebApplication2
                 .AddEntityFrameworkStores<ApplicationDbContext>()/*.AddUserManager<UserManager<ApplicationUser>>()*/;
 
             services.AddTransient<UserMangmentService, UserMangmentService>();
+            services.AddTransient<ProfileService, ProfileService>();
             services.AddTransient<UserManager<ApplicationUser>>();
             services.AddTransient<UserHomeService, UserHomeService>();
             services.AddTransient<RoleMangmentService, RoleMangmentService>();

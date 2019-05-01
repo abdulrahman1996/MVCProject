@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <Content Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
     <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
     <Compile Remove="Data\Migrations\20190401185920_firstMigration.cs" />
@@ -26,6 +33,10 @@
     <Compile Remove="Data\Migrations\20190403154722_myy.Designer.cs" />
     <Compile Remove="Data\Migrations\20190420182221_kfayaa.cs" />
     <Compile Remove="Data\Migrations\20190420182221_kfayaa.Designer.cs" />
+    <Compile Remove="Migrations\20190420183826_test1.cs" />
+    <Compile Remove="Migrations\20190420183826_test1.Designer.cs" />
+    <Compile Remove="Migrations\20190421162109_all.cs" />
+    <Compile Remove="Migrations\20190421162109_all.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,7 +47,6 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Data\Migrations\" />
-    <Folder Include="NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>

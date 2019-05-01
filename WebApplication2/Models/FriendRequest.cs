@@ -5,17 +5,22 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
-
+using WebApplication2.Enums;
 namespace WebApplication2.Models
 {
     public class FriendRequest
     {
         public int ID { get; set; }
         [Required]
-        public int State { get; set; }
-        [ForeignKey("RequesterID")]
+        public FriendState State { get; set; }
+        [ForeignKey("Requester")]
+        public string RequesterID { set; get; }
+
         public virtual ApplicationUser Requester { get; set; }
-        [ForeignKey("RequestedID")]
+
+        [ForeignKey("Requested")]
+        public string RequestedID { set; get; }
+
         public virtual ApplicationUser Requested { get; set; }
         public bool Deleted { get; set; }
     }
