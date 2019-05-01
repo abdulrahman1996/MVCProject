@@ -74,11 +74,11 @@ namespace WebApplication2.Controllers
             return PartialView("GetAll",userHomeService.GetAllPosts(CurrentUserID));
         }
         
-        //change current userid to userid
         [HttpPost]
         public IActionResult IncrementLikes(int postId,string userid)
         {
             string CurrentUserID = UserManager.GetUserAsync(HttpContext.User).Result.Id;
+            ViewBag.CurrentUserID = userid;
 
             userHomeService.IncrementLikes(postId, userid);
             return PartialView("GetAll", userHomeService.GetAllPosts(CurrentUserID));

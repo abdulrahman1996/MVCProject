@@ -6,12 +6,12 @@
 
 <div class="container">
     <div class="col-xs-4 bg-info">
-        <div id="MyGetAll">
-            <partial name="ImageDiv" model="@Model" />
-        </div>
+        @*<div id="MyGetAll">
+            <partial name="ImageDiv" model=ViewBag.img />
+        </div>*@
         <div>
             <div id="MyInFoGetAll">
-                <partial name="getinfo" model="@Model" />
+                <partial name="getinfo" model=ViewBag.user/>
             </div>
         </div>
         <div>
@@ -19,7 +19,11 @@
         </div>
     </div>
     <div class="col-xs-8 bg-danger">
-        posts
+        <partial name="AddPost">
+            <div id="AllData">
+                <partial name="GetALL" model=ViewBag.posts>
+
+            </div>
     </div>
 
 </div>
@@ -42,11 +46,57 @@
     </div>
 </div>
 
+
+
+<div id="Createmodal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">edit</h5>
+
+            </div>
+            <div class="modal-body">
+                <div id="CreateData">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="EditmodalPosts" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">edit</h5>
+
+            </div>
+            <div class="modal-body">
+                <div id="EditPostData">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
 @section Scripts
     {
     <script>
         function fun2() {
             $("#EditModal").modal("toggle")
         }
+
+        function successCreate() {
+            $("#Createmodal").modal("toggle");
+        }
+
+        //function successEdit() {
+        //    $("#EditmodalPosts").modal("toggle");
+        //}
     </script>
 }

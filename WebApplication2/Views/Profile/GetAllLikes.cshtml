@@ -1,0 +1,24 @@
+﻿@model IEnumerable<WebApplication2.Models.ApplicationUser>
+
+<div>
+    @foreach (var item in Model)
+
+    {
+        <div>
+            <a asp-action="" asp-route-id="">
+                <img src="~/images/cover.jpg" width="50" height="50">
+                @item.UserName
+
+            </a>
+        </div>
+    }
+
+    @if (Model == null)
+    {
+        <p>no likes</p>
+
+    }
+
+</div>
+
+

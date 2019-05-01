@@ -4,14 +4,14 @@
 @inject UserHomeService userHomeService
 @inject UserManager<ApplicationUser> UserManager
 
-
+<div>@Context.Request.Path.</div>
 <div class="container">
     @foreach (var item in Model)
     {
 
         <div style="width:600px;background-color: #fff ;border-radius:5px">
-            <a  asp-controller="UserHome"   asp-action="" asp-route-id="">
-                <img src="~/images/cover.jpg" class="img-circle">
+            <a asp-controller="UserHome" asp-action="" asp-route-id="">
+                <img src=@item.User.ImagePath class="img-circle">
                 @item.User.UserName
 
             </a>
@@ -19,8 +19,8 @@
             <div style="float:right">
                 @if (item.UserID == ViewBag.CurrentUserID)
                 {
-                    <a  asp-controller="UserHome"   asp-action="EditPost" asp-route-postId=@item.ID data-ajax="true" data-ajax-method="get" data-toggle="modal" data-target="#Editmodal" data-ajax-update="#EditData" data-ajax-mode="replace" class="btn btn-success" data-ajax-success="successEdit()">Edit</a>
-                    <a  asp-controller="UserHome"   asp-action="DeletePost" asp-route-postid=@item.ID data-ajax="true" data-ajax-method="get" data-ajax-update="#AllData" class="btn btn-danger">Delete</a>
+                    <a asp-controller="UserHome" asp-action="EditPost" asp-route-postId=@item.ID data-ajax="true" data-ajax-method="get" data-toggle="modal" data-target="#Editmodal" data-ajax-update="#EditData" data-ajax-mode="replace" class="btn btn-success" data-ajax-success="successEdit()">Edit</a>
+                    <a asp-controller="UserHome" asp-action="DeletePost" asp-route-postid=@item.ID data-ajax="true" data-ajax-method="get" data-ajax-update="#AllData" class="btn btn-danger">Delete</a>
                 }
             </div>
 
@@ -30,40 +30,50 @@
                 @Html.DisplayFor(modelItem => item.Content)
             </div>
 
-            <a  asp-controller="UserHome"   asp-action="GetAllLikes" asp-route-postId=@item.ID data-ajax="true" data-ajax-method="get" data-toggle="modal" data-target="#Createmodal" data-ajax-update="#CreateData" data-ajax-mode="replace"> @userHomeService.LikesCount(item.ID)</a>
+            <a asp-controller="UserHome" asp-action="GetAllLikes" asp-route-postId=@item.ID data-ajax="true" data-ajax-method="get" data-toggle="modal" data-target="#Createmodal" data-ajax-update="#CreateData" data-ajax-mode="replace"> @userHomeService.LikesCount(item.ID)</a>
 
             <br>
-            <a class="btn btn-primary"  asp-controller="UserHome"   asp-action="IncrementLikes" asp-route-postId=@item.ID asp-route-userid=@item.User.Id data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">Like</a>
+            <a class="btn btn-primary" asp-controller="UserHome" asp-action="IncrementLikes" asp-route-postId=@item.ID asp-route-userid=@item.User.Id data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">Like</a>
             <br>
-            <form  asp-controller="UserHome"   asp-action="AddComment" asp-route-postId=@item.ID asp-route-userid=@ViewBag.CurrentUserID data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">
+            <form asp-controller="UserHome" asp-action="AddComment" asp-route-postId=@item.ID asp-route-userid=@ViewBag.CurrentUserID data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">
                 <input type="text" placeholder="enter your comment" style="width:300px;height:50px;border-radius:3px" name="content">
                 <input type="submit" value="Comment" class="btn btn-primary">
 
             </form>
-            @foreach (var item2 in item.Comments)
-            {
-                @if (!item2.Deleted)
+            <br>
+            <table class="table-bordered">
+
+
+                @foreach (var item2 in item.Comments)
                 {
-                    <hr>
-                    <a  asp-controller="UserHome"   asp-action="" asp-route-id="">
-                        <img src="~/images/cover.jpg" width="50" height="50" class="img-circle">
-                         @item2.User.UserName
-
-                    </a>
-                    @if (item2.User.Id== ViewBag.CurrentUserID)
+                    @if (!item2.Deleted)
                     {
-                        <a  asp-controller="UserHome"   asp-action="EditComment" asp-route-commentid=@item2.ID asp-route-userid=@item2.User.Id class="btn btn-success" data-ajax="true" data-ajax-method="get" data-toggle="modal" data-target="#Editmodal" data-ajax-update="#EditData" data-ajax-mode="replace" class="btn btn-success" data-ajax-success="successEdit()">Edit</a>
-                        <a  asp-controller="UserHome"   asp-action="DeleteComment" asp-route-commentid=@item2.ID asp-route-userid=@item2.User.Id data-ajax="true" data-ajax-method="get" data-ajax-update="#AllData" class="btn btn-danger">Delete</a>
-                    }
-                    <br />
-                    <div style="height:50px ;width:400px">
-                        @Html.DisplayFor(modelItem => item2.Content)
-                    </div>
-                }
-            }
+                        <tr>
+                            <td>
+                        <hr>
+                        <a asp-controller="UserHome" asp-action="" asp-route-id="">
+                            <img src=@item.User.ImagePath width="50" height="50" class="img-circle">
+                            @item2.User.UserName
 
-            <hr>
+                        </a>
+                        @if (item2.User.Id == ViewBag.CurrentUserID)
+                        {
+                            <a asp-controller="UserHome" asp-action="EditComment" asp-route-commentid=@item2.ID asp-route-userid=@item2.User.Id data-ajax="true" data-ajax-method="get" data-toggle="modal" data-target="#Editmodal" data-ajax-update="#EditData" data-ajax-mode="replace" class="btn btn-success" data-ajax-success="successEdit()">Edit</a>
+                            <a asp-controller="UserHome" asp-action="DeleteComment" asp-route-commentid=@item2.ID asp-route-userid=@item2.User.Id data-ajax="true" data-ajax-method="get" data-ajax-update="#AllData" class="btn btn-danger">Delete</a>
+                        }
+                        <br />
+                        <div style="height:50px ;width:400px">
+                            @Html.DisplayFor(modelItem => item2.Content)
+                        </div>
+                                <td>
+                            </tr>
+                    }
+                }
+            </table>
+
         </div>
+        <br>
+       
     }
 </div>
 
