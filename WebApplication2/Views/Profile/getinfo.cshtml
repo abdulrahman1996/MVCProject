@@ -25,21 +25,17 @@
 <div>
 
     @{
-        string x;
-        if (ViewBag.CurrUser == false)
-        {
-            x = "hide";
-        }
-        else
 
+        if (ViewBag.CurrUser == true)
         {
-            x = "show";
+            <a asp-action="Edit" asp-route-id="@Model.Id" data-ajax="true" class="x btn-block  btn-info form-control " style="font-weight:bold" data-ajax-method="Get" data-ajax-update="#EditData" data-ajax-mode="replace" data-ajax-success="fun2()">Edit info</a>
+
         }
 
-       }
+
+    }
 
 
-    <a asp-action="Edit" asp-route-id="@Model.Id" data-ajax="true" class="x btn-block  btn-info form-control " style="font-weight:bold" data-ajax-method="Get" data-ajax-update="#EditData" data-ajax-mode="replace" data-ajax-success="fun2()">Edit info</a>
 </div>
 
 

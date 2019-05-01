@@ -22,6 +22,10 @@ namespace WebApplication2.Services
             HttpContext = httpContext.HttpContext;
 
         }
+        public ApplicationUser GetUser(string id)
+        {
+            return db.Users.Find(id);
+        }
         public void EditPhotoAsync(ApplicationUser um)
         {
             ApplicationUser applicationUser = new ApplicationUser();

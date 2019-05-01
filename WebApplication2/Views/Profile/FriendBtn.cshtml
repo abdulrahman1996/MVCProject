@@ -1,0 +1,36 @@
+﻿@{
+    var partial = "~/Views/Profile/FriendBtn.cshtml";
+  
+        @if (ViewBag.friendState == FriendState.NotFriend)
+        {
+            <a class="btn btn-default friendState" 
+            data-ajax-mode="replace" 
+            asp-action="AddFriend" 
+            asp-controller="Friends" 
+            asp-route-id="@Model.Id"
+             asp-route-partial="@partial" 
+         
+            data-ajax-update="#friendBtn"
+            data-ajax="true" data-ajax-method="get"> Add Friend</a>
+
+        }
+        @if (ViewBag.friendState == FriendState.Friend)
+        {
+            <a class="btn btn-danger friendState" data-ajax-mode="replace" asp-action="DeleteFriend" asp-controller="Friends"   asp-route-id="@Model.Id" asp-route-partial="@partial" data-ajax-update="#friendBtn" data-ajax="true" data-ajax-method="get">Delete</a>
+
+
+        }
+        @if (ViewBag.friendState == FriendState.Requested)
+        {
+            <a class="btn btn-success friendState" data-ajax-mode="replace" asp-action="AcceptRequest" asp-controller="Friends"  asp-route-id="@Model.Id" asp-route-partial="@partial" data-ajax-update="#friendBtn" data-ajax="true" data-ajax-method="get">Accept Request</a>
+
+        }
+        @if (ViewBag.friendState == FriendState.Requester)
+        {
+            <a class="btn btn-warning friendState" data-ajax-mode="replace" asp-action="RemoveRequest" asp-controller="Friends" asp-route-id="@Model.Id" asp-route-partial="@partial" data-ajax-update="#friendBtn" data-ajax="true" data-ajax-method="get">Remove Request</a>
+        }
+
+   
+
+
+}

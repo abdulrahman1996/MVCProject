@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Index";
-    //Layout = "_LoginLayout";
+
 }
 
 <style>
@@ -34,12 +34,26 @@
 
 <div class="container">
     <div class="col-xs-4 bg-info">
-        <div id="MyGetAll">
-            <partial name="ImageDiv" model="@Model" />
+        
+        <div class="row" id="MyGetAll">
+            <div class="col-lg-4">
+                <partial name="ImageDiv" model="@Model" />
+ 
+            </div>
+            <div class="col-lg-2"></div>
+           
+            <div id="friendBtn" class="col-lg-4">
+                @if (ViewBag.friendState != null)
+                {
+                    <partial name="FriendBtn" model="@ViewBag.user" />
+                }
+                </div>
         </div>
         <div>
             <div id="MyInFoGetAll">
-                <partial name="getinfo" model="@ViewBag.user" />
+               
+                    <partial name="getinfo" model="@ViewBag.user" />
+                
             </div>
         </div>
         <br />
@@ -47,11 +61,11 @@
         <div class="   row">
             @foreach (var friend in ViewBag.friendes)
             {
-            <a asp-action="" asp-route-id=@friend.Id>
+            <a asp-action="GetProfile" asp-route-id=@friend.Id>
 
                 <div class=" col-lg-4 imgcontainer">
 
-                    <img src=@String.Concat("/images" , friend.ImagePath ) class="  fimg " />
+                    <img src=@String.Concat("" , friend.ImagePath ) class="  fimg " />
                     <div class="top-left">@friend.UserName</div>
                 </div>
             </a> 

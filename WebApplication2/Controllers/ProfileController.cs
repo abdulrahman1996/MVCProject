@@ -30,8 +30,8 @@ namespace WebApplication2.Controllers
         public bool CurrUser = true;
         public IActionResult Index()
         {
-
-            ViewBag.friendes = friendsServiece.GetAllFrinds();
+            
+           ViewBag.friendes = friendsServiece.GetAllFrinds();
             ViewBag.user = user.GetUserAsync(HttpContext.User).Result;
             ViewBag.CurrUser = CurrUser;
 
@@ -53,6 +53,8 @@ namespace WebApplication2.Controllers
             //user.GetUserAsync(HttpContext.User).Result
             return PartialView(user.GetUserAsync(HttpContext.User).Result);
         }
+
+        
         [HttpPost]
         public IActionResult Edit(ApplicationUser applicationUser)
         {
@@ -83,8 +85,11 @@ namespace WebApplication2.Controllers
         {
             CurrUser = false;
             ViewBag.CurrUser = CurrUser;
+            ViewBag.friendes = friendsServiece.GetAllFrinds(id);
+            ViewBag.user = service.GetUser(id);
+            ViewBag.friendState =  friendsServiece.GetFriendShipState(id);
 
-            return View("Index");
+            return View("Index" , service.GetUser(id));
 
         }
 
