@@ -43,60 +43,16 @@
         padding: 0px;
         margin: 0px;
     }
+    .friendState{
+        margin-top:27px;
+    }
 </style>
 <h4>SearchFriend</h4>
+ 
 
 <div class="col-lg-2"></div>
-<div class="row col-lg-6 search-lis">
 
 
-    @foreach (var  user in Model)
-    {
-   
-
-        <div class=" row serch-item">
-                <div class="col-lg-2">
-                    <img src="@String.Concat("/images" , user.ImagePath )" />
-
-                </div>
-                <div class="col-lg-3">
-                    <a>
-                        <p class="name"> @user.UserName </p>
-                    </a>
-
-                    <p class="city"> @user.City </p>
-                </div>
-                <div class="left">
-                    @if (user.State == FriendState.Friend)
-                    {
-                    <p>
-hi
-                    </p>
-                    }
-                  @if (user.State == FriendState.NotFriend)
-                    {
-                    <p>
-hi
-                    </p>
-                    }
-                  @if (user.State == FriendState.Requested)
-                    {
-                    <p>
-hi
-                    </p>
-                    }
-                  @if (user.State == FriendState.Requester)
-                    {
-                    <p>
-hi
-                    </p>
-                    }
-                  
-                </div>
-               
-
-            </div>
-
-    }
-
+<div id="FriendsList">
+    <partial name="FriendsList" model="@Model" />
 </div>

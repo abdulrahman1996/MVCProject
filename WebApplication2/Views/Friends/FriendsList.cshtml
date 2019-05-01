@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WebApplication2.ViewModels.frindRequestDetail>
+@{ 
+    var name = Context.Request.Query["name"][0]; 
+}
+<div id="searchList" class="row col-lg-6 search-lis">
+
+    
+    
+
+    @foreach (var user in Model)
+    {
+
+
+        <div class=" row serch-item">
+            <div class="col-lg-2">
+                <img src="@String.Concat("/images" , user.ImagePath )" />
+
+            </div>
+            <div class="col-lg-3">
+                <a>
+                    <p class="name"> @user.UserName </p>
+                </a>
+
+                <p class="city"> @user.City </p>
+            </div>
+            <div class="col-lg-4">
+
+            </div>
+            <div class=" col-lg-3">
+                @if (user.State == FriendState.NotFriend)
+                {
+                    <a class="btn btn-default friendState" data-ajax-mode="replace" asp-action="AddFriend" asp-route-id="@user.Id" asp-route-partial="FriendsList" asp-route-name="@name" data-ajax-update="#FriendsList" data-ajax="true" data-ajax-method="post"> Add Friend</a>
+
+                }
+                @if (user.State == FriendState.Friend)
+                {
+                    <a class="btn btn-danger friendState" data-ajax-mode="replace" asp-action="DeleteFriend" asp-route-name="@name" asp-route-id="@user.Id" asp-route-partial="FriendsList" data-ajax-update="#FriendsList" data-ajax="true" data-ajax-method="post">Delete</a>
+
+
+                }
+                @if (user.State == FriendState.Requested)
+                {
+                    <a class="btn btn-success friendState" data-ajax-mode="replace" asp-action="AcceptRequest" asp-route-name="@name" asp-route-id="@user.Id" asp-route-partial="FriendsList" data-ajax-update="#FriendsList" data-ajax="true" data-ajax-method="post">Accept Request</a>
+
+                }
+                @if (user.State == FriendState.Requester)
+                {
+                    <a class="btn btn-warning friendState" data-ajax-mode="replace" asp-action="RemoveRequest" asp-route-name="@name" asp-route-id="@user.Id" asp-route-partial="FriendsList" data-ajax-update="#FriendsList" data-ajax="true" data-ajax-method="post">Remove Request</a>
+                }
+
+            </div>
+
+
+        </div>
+
+    }
+
+</div>
+        
+
+
