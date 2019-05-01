@@ -27,11 +27,14 @@ namespace WebApplication2.Controllers
         }
         public IActionResult Index()
         {
-     
+            ViewBag.user = user.GetUserAsync(HttpContext.User).Result;
             return View(user.GetUserAsync(HttpContext.User).Result);
+
         }
         public IActionResult getinfo()
         {
+            ViewBag.user = user.GetUserAsync(HttpContext.User).Result;
+
 
             return PartialView(user.GetUserAsync(HttpContext.User).Result);
         }
@@ -50,15 +53,38 @@ namespace WebApplication2.Controllers
 
             return PartialView("getinfo", applicationUser);
         }
-        //profile/Id
-        [Route("/profile/{id}")]
 
-        public string GetProfile(string id)
+        [HttpPost]
+        public IActionResult Imagesave()
+        {
+            var file = Request.Form.Files["imageUploadForm"];
+            var fileName = Path.GetFileName(file.FileName);
+            var pathImage = Path.Combine("images", fileName);
+            var path = Path.Combine(hosting.WebRootPath, "images", fileName);
+            file.CopyTo(new FileStream(path, FileMode.Create));
+            
+            ApplicationUser u = user.GetUserAsync(HttpContext.User).Result;
+            u.ImagePath = pathImage;
+            service.EditPhotoAsync(u);
+            return PartialView("ImageDiv", user.GetUserAsync(HttpContext.User).Result);
+        }
+        //profile/Id
+        //[Route("/profile/{id}")]
+
+        //public string GetProfile(string id)
+        //{
+
+
+        //    return "kkkkkk";
+        //}
+        [HttpGet]
+        public IActionResult ImageDiv(/*IFormFile file*/)
         {
 
-
-            return "kkkkkk";
+            return PartialView(user.GetUserAsync(HttpContext.User).Result);
         }
+        
+ 
 
     }
 }
