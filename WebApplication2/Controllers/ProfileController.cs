@@ -18,23 +18,32 @@ namespace WebApplication2.Controllers
 
         private readonly ProfileService service;
         private readonly UserManager<ApplicationUser>user;
-        private readonly IHostingEnvironment hosting; 
-        public ProfileController(ProfileService s, UserManager<ApplicationUser> u,IHostingEnvironment h)
+        private readonly IHostingEnvironment hosting;
+        private readonly FriendsServiece friendsServiece;
+        public ProfileController(ProfileService s, UserManager<ApplicationUser> u,IHostingEnvironment h  , FriendsServiece f)
         {
             service = s;
+            friendsServiece = f;
             user = u;
             hosting = h;
         }
         public bool CurrUser = true;
         public IActionResult Index()
         {
+
+            ViewBag.friendes = friendsServiece.GetAllFrinds();
+            ViewBag.user = user.GetUserAsync(HttpContext.User).Result;
             ViewBag.CurrUser = CurrUser;
 
             return View(user.GetUserAsync(HttpContext.User).Result);
+
         }
         public IActionResult getinfo()
         {
+            ViewBag.user = user.GetUserAsync(HttpContext.User).Result;
+
             ViewBag.CurrUser = CurrUser;
+
             return PartialView(user.GetUserAsync(HttpContext.User).Result);
         }
 
@@ -52,15 +61,23 @@ namespace WebApplication2.Controllers
 
             return PartialView("getinfo", applicationUser);
         }
+
+        [HttpPost]
+        public IActionResult Imagesave()
+        {
+            var file = Request.Form.Files["imageUploadForm"];
+            var fileName = Path.GetFileName(file.FileName);
+            var pathImage = Path.Combine("images", fileName);
+            var path = Path.Combine(hosting.WebRootPath, "images", fileName);
+            file.CopyTo(new FileStream(path, FileMode.Create));
+            
+            ApplicationUser u = user.GetUserAsync(HttpContext.User).Result;
+            u.ImagePath = pathImage;
+            service.EditPhotoAsync(u);
+            return PartialView("ImageDiv", user.GetUserAsync(HttpContext.User).Result);
+        }
         //profile/Id
-        //[Route("/profile/{id}")]
-
-        //public string GetProfile(string id)
-        //{
-
-
-        //    return "kkkkkk";
-        //}
+        //  [Route("/profile/{id}")]
 
         public IActionResult GetProfile(string id)
         {
@@ -70,5 +87,6 @@ namespace WebApplication2.Controllers
             return View("Index");
 
         }
+
     }
 }

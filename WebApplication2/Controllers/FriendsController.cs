@@ -16,7 +16,8 @@ namespace WebApplication2.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            
+            return View(FriendsServiece.GetAllFrinds());
         }
 
         public IActionResult SearchFriend(string Name)
@@ -27,29 +28,42 @@ namespace WebApplication2.Controllers
             return View(users);
         }
 
+
         public JsonResult SearchFriendAutoComplete(string Name)
         {
 
             return Json(FriendsServiece.SearchFreinds(Name));
         }
 
-        public void SendRequest(string Id)
-        {
+       
 
+       public IActionResult AddFriend(string id , string partial  , string name  )
+        {
+            FriendsServiece.AddFriend(id);
+
+
+            return PartialView(partial, FriendsServiece.SearchFreinds(name));     
         }
 
-        public void DeleteRequest(string Id)
+        public IActionResult AcceptRequest(string Id , string partial  , string name)
         {
 
+            FriendsServiece.AcceptRequest(Id); 
+            return PartialView( partial, FriendsServiece.SearchFreinds(name));
+        }
+        public IActionResult  DeleteFriend(string id , string partial  , string name )
+        {
+            FriendsServiece.DeleteFriend(id);
+            
+            return PartialView( partial, FriendsServiece.SearchFreinds(name));
         }
 
-        public void AcceptRequest(string Id)
-        {
 
-        }
-        public void DeleteFriend()
+        public IActionResult RemoveRequest (string id, string partial, string name)
         {
+            FriendsServiece.RemoveRequest(id);
 
+            return PartialView(partial, FriendsServiece.SearchFreinds(name));
         }
     }
 }

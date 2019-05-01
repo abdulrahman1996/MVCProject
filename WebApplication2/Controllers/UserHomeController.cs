@@ -18,6 +18,7 @@ namespace WebApplication2.Controllers
 
         public UserHomeController(UserHomeService userHome, UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> SignInManager)
         {
+
             userHomeService = userHome;
             UserManager = usermanager;
             signInManager = SignInManager;

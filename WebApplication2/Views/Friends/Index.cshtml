@@ -1,0 +1,89 @@
+﻿@model IEnumerable<WebApplication2.ViewModels.frindRequestDetail>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<style>
+    .search-lis {
+        background-color: white;
+        border-radius: 9px;
+    }
+
+    .serch-item {
+        height: 100px;
+        border-bottom-color: #a9f5f5;
+        border-bottom-width: 0.5px;
+        border-bottom-style: solid;
+    }
+
+    img {
+        margin-top: 10px;
+        border-radius: 50px;
+        width: 80px;
+        height: 80px;
+        image-orientation: unset;
+    }
+
+    .name:hover {
+        margin-top: 10px;
+        color: blue;
+        cursor: pointer;
+    }
+
+    .name {
+        margin-top: 10px;
+        color: blue;
+    }
+
+    .city {
+        font-size: 13px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .friendState {
+        margin-top: 27px;
+    }
+</style>
+<h4>SearchFriend</h4>
+
+<div class="res">
+
+
+    <div class="col-lg-2"></div>
+    <div class="row col-lg-6 search-lis">
+
+
+        @foreach (var user in Model)
+        {
+
+
+            <div class=" row serch-item">
+                <div class="col-lg-2">
+                    <img src="@String.Concat("/images" , user.ImagePath )" />
+
+                </div>
+                <div class="col-lg-3">
+                    <a>
+                        <p class="name"> @user.UserName </p>
+                    </a>
+
+                    <p class="city"> @user.City </p>
+                </div>
+                <div class="col-lg-4">
+
+                </div>
+                <div class=" col-lg-3">
+               
+                        <a class="btn btn-danger friendState"> Delete </a>
+
+                </div>
+
+            </div>
+
+        }
+
+    </div>
+</div>
