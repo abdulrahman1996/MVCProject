@@ -25,14 +25,16 @@ namespace WebApplication2.Controllers
             user = u;
             hosting = h;
         }
+        public bool CurrUser = true;
         public IActionResult Index()
         {
-     
+            ViewBag.CurrUser = CurrUser;
+
             return View(user.GetUserAsync(HttpContext.User).Result);
         }
         public IActionResult getinfo()
         {
-
+            ViewBag.CurrUser = CurrUser;
             return PartialView(user.GetUserAsync(HttpContext.User).Result);
         }
 
@@ -51,14 +53,22 @@ namespace WebApplication2.Controllers
             return PartialView("getinfo", applicationUser);
         }
         //profile/Id
-        [Route("/profile/{id}")]
+        //[Route("/profile/{id}")]
 
-        public string GetProfile(string id)
+        //public string GetProfile(string id)
+        //{
+
+
+        //    return "kkkkkk";
+        //}
+
+        public IActionResult GetProfile(string id)
         {
+            CurrUser = false;
+            ViewBag.CurrUser = CurrUser;
 
+            return View("Index");
 
-            return "kkkkkk";
         }
-
     }
 }
