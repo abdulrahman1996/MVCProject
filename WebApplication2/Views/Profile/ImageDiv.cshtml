@@ -86,18 +86,20 @@
                 imgtag.src = event.target.result;
                 var fileContent = event.target.result;
 
-                console.log(fileContent);
+                console.log("Inside Function");
                 var file = document.getElementById("user");
                 formData.append("imageUploadForm", x);
 
                 $.ajax({
                     type: "POST",
-                    url: '@Url.Action("Imagesave")',
+                 //   contentType: "image/jpeg",
+                    url: '@Url.Action("Imagesave", "Profile")',
                     data: formData,
                     contentType: false,
                     processData: false,
-                    dataType:'json'                    
-                }).done(function () { console("yes"); });
+                    dataType: 'json',
+
+                }).done(function () { FileReader.abort() });
                /* var file = event.target.result;
                 
                 var fd = new FormData();
@@ -108,7 +110,7 @@
 
             };
             reader.readAsDataURL(event.target.files[0]);
-            
+            reader
         }
     
 </script>

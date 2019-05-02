@@ -17,6 +17,6 @@ namespace WebApplication2.ViewModels
                     public string    RequestedID { set; get;  }
                      public string     RequesterID{ set; get;  }
                     
-                      public FriendState State { set; get;  }
+                      public Nullable< FriendState> State { set; get;  }
     }
 }

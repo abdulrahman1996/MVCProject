@@ -17,17 +17,20 @@ namespace WebApplication2.Controllers
     {
 
         private readonly ProfileService service;
-        private readonly UserManager<ApplicationUser>user;
+        private readonly UserManager<ApplicationUser> user;
         private readonly IHostingEnvironment hosting;
         private readonly UserHomeService userHomeService;
+        private readonly FriendsServiece friendsServiece;
 
-        public ProfileController(ProfileService s, UserManager<ApplicationUser> u,IHostingEnvironment h, UserHomeService userHome)
+        public ProfileController(ProfileService s, UserManager<ApplicationUser> u, IHostingEnvironment h, UserHomeService userHome, FriendsServiece f)
         {
             userHomeService = userHome;
             service = s;
             user = u;
             hosting = h;
+            friendsServiece = f;
         }
+        public bool CurrUser = true;
         public IActionResult Index()
         {
             string CurrentUserID = user.GetUserAsync(HttpContext.User).Result.Id;
@@ -38,13 +41,18 @@ namespace WebApplication2.Controllers
             ViewBag.CurrentUserUserName = userHomeService.GetUserName(CurrentUserID);
 
             ViewBag.user = user.GetUserAsync(HttpContext.User).Result;
-            ViewBag.img= user.GetUserAsync(HttpContext.User).Result;
+            ViewBag.img = user.GetUserAsync(HttpContext.User).Result;
+
+            ViewBag.friendes = friendsServiece.GetAllFrinds();
+            ViewBag.user = user.GetUserAsync(HttpContext.User).Result;
+            ViewBag.CurrUser = CurrUser;
 
             return View();
         }
         public IActionResult getinfo()
         {
-           // ViewBag.user = user.GetUserAsync(HttpContext.User).Result;
+            ViewBag.user = user.GetUserAsync(HttpContext.User).Result;
+            ViewBag.CurrUser = CurrUser;
             return PartialView(user.GetUserAsync(HttpContext.User).Result);
         }
 
@@ -60,10 +68,10 @@ namespace WebApplication2.Controllers
         {
 
             service.EditAsync(applicationUser);
-            
+
             return PartialView("getinfo", applicationUser);
         }
-       // profile/Id
+        // profile/Id
         //[Route("/profile/{id}")]
         //public IActionResult GetProfile(string id)
         //{
@@ -80,7 +88,7 @@ namespace WebApplication2.Controllers
         //}
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public IActionResult GetAll(string UserID= "eb071205-0e4f-49d4-95e5-b943bd2c309e")
+        public IActionResult GetAll(string UserID = "eb071205-0e4f-49d4-95e5-b943bd2c309e")
         {
             string CurrentUserID = user.GetUserAsync(HttpContext.User).Result.Id;
 
@@ -148,7 +156,7 @@ namespace WebApplication2.Controllers
             ViewBag.CurrentUserID = userid;
 
             userHomeService.DeleteComment(commentid);
-            return PartialView("GetAll", service .GetAllUserPosts(CurrentUserID));
+            return PartialView("GetAll", service.GetAllUserPosts(CurrentUserID));
         }
         [HttpGet]
         public IActionResult EditPost(int postId)
@@ -180,6 +188,33 @@ namespace WebApplication2.Controllers
             ViewBag.CurrentUserID = CurrentUserID;
             userHomeService.EditComment(comment);
             return PartialView("GetAll", service.GetAllUserPosts(CurrentUserID));
+
+        }
+
+        [HttpPost]
+        public IActionResult Imagesave()
+        {
+            var file = Request.Form.Files["imageUploadForm"];
+            var fileName = Path.GetFileName(file.FileName);
+            var pathImage = Path.Combine("images", fileName);
+            var path = Path.Combine(hosting.WebRootPath, "images", fileName);
+            file.CopyTo(new FileStream(path, FileMode.Create));
+
+            ApplicationUser u = user.GetUserAsync(HttpContext.User).Result;
+            u.ImagePath = pathImage;
+            service.EditPhotoAsync(u);
+            return PartialView("ImageDiv", user.GetUserAsync(HttpContext.User).Result);
+        }
+
+        public IActionResult GetProfile(string id)
+        {
+            CurrUser = false;
+            ViewBag.CurrUser = CurrUser;
+            ViewBag.friendes = friendsServiece.GetAllFrinds(id);
+            ViewBag.user = service.GetUser(id);
+            ViewBag.friendState = friendsServiece.GetFriendShipState(id);
+
+            return View("Index", service.GetUser(id));
 
         }
 

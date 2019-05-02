@@ -1,21 +1,72 @@
 ﻿@{
     ViewData["Title"] = "Index";
-    //Layout = "_LoginLayout";
+    
 }
 
 
+<style>
+    .imgcontainer {
+        position: relative;
+        text-align: center;
+        color: white;
+    }
+
+        .imgcontainer :hover {
+            opacity: 0.5;
+        }
+
+    .top-left {
+        position: absolute;
+        top: 4pt;
+        left: 16pt;
+        color: grey;
+    }
+
+    .fimg {
+        height: 70pt;
+        image-orientation: unset;
+    }
+</style>
+
 <div class="container">
     <div class="col-xs-4 bg-info">
-        @*<div id="MyGetAll">
-                <partial name="ImageDiv" model=ViewBag.img />
-            </div>*@
-        <div>
-            <div id="MyInFoGetAll">
-                <partial name="getinfo" model=ViewBag.user />
+
+        <div class="row" id="MyGetAll">
+            <div class="col-lg-4">
+                <partial name="ImageDiv" model="@ViewBag.user" />
+
+            </div>
+            <div class="col-lg-2"></div>
+
+            <div id="friendBtn" class="col-lg-4">
+                @if (ViewBag.friendState != null)
+                {
+                    <partial name="FriendBtn" model="@ViewBag.user" />
+                }
             </div>
         </div>
         <div>
-            Abdo
+            <div id="MyInFoGetAll">
+
+
+                <partial name="getinfo" model="@ViewBag.user" />
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="   row">
+            @foreach (var friend in ViewBag.friendes)
+            {
+                <a asp-action="GetProfile" asp-route-id=@friend.Id>
+
+                    <div class=" col-lg-4 imgcontainer">
+
+                        <img src=@String.Concat("" , friend.ImagePath ) class="  fimg " />
+                        <div class="top-left">@friend.UserName</div>
+                    </div>
+                </a>
+            }
+
         </div>
     </div>
     <div class="col-xs-8 bg-danger">
@@ -105,8 +156,8 @@
         function successEdit() {
             $("#EditModal").modal("toggle");
         }
-            //function successEdit() {
-            //    $("#EditmodalPosts").modal("toggle");
-            //}
+                //function successEdit() {
+                //    $("#EditmodalPosts").modal("toggle");
+                //}
     </script>
 }
