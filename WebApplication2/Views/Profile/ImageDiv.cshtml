@@ -50,18 +50,21 @@
     @if (String.IsNullOrEmpty(Model.ImagePath))
     {
 
-        Model.ImagePath = "~/images/users/default-user-image.png";
+        Model.ImagePath = "/images/users/default-user-image.png";
         @*<img id="user" src="@Url.Content(Model.ImagePath)" />*@
 
     }
-    <img id="user" src="@Url.Content(Model.ImagePath)" />
-   
-    <span class="image-upload col-xs-6 col-xs-offset-9 topIn">
-        <label for="file-input">
-            <img src="~/images/icon.png" id="icon" style="pointer-events: none" />
-        </label>
-        <input id="file-input" onchange="readImage(event)" type="file"/>
-    </span>
+    <img id="user" src="@String.Concat("" , Model.ImagePath)" />
+    @if (ViewBag.CurrUser == true)
+    {
+<span class="image-upload col-xs-6 col-xs-offset-9 topIn">
+    <label for="file-input">
+        <img src="~/images/icon.png" id="icon" style="pointer-events: none" />
+    </label>
+    <input id="file-input" onchange="readImage(event)" type="file" />
+</span>}
+               
+
 
 </div>
 

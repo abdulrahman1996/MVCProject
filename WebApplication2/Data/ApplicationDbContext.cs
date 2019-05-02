@@ -17,7 +17,7 @@ namespace WebApplication2.Data
         {
             builder.Entity<ApplicationUser>()
                 .Property(u => u.ImagePath)
-                .HasDefaultValue("/users/default-user-image.png");
+                .HasDefaultValue("/images/users/default-user-image.png");
 
             base.OnModelCreating(builder);
         }

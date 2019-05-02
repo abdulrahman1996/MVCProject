@@ -33,15 +33,6 @@ namespace WebApplication2.Controllers
         public bool CurrUser = true;
         public IActionResult Index()
         {
-            string CurrentUserID = user.GetUserAsync(HttpContext.User).Result.Id;
-
-            var res = service.GetAllUserPosts(user.GetUserAsync(HttpContext.User).Result.Id);
-            ViewBag.posts = res;
-            ViewBag.CurrentUserID = user.GetUserAsync(HttpContext.User).Result.Id;
-            ViewBag.CurrentUserUserName = userHomeService.GetUserName(CurrentUserID);
-
-            ViewBag.user = user.GetUserAsync(HttpContext.User).Result;
-            ViewBag.img = user.GetUserAsync(HttpContext.User).Result;
 
             ViewBag.friendes = friendsServiece.GetAllFrinds();
             ViewBag.user = user.GetUserAsync(HttpContext.User).Result;
@@ -63,6 +54,8 @@ namespace WebApplication2.Controllers
 
             return PartialView(user.GetUserAsync(HttpContext.User).Result);
         }
+
+        
         [HttpPost]
         public IActionResult Edit(ApplicationUser applicationUser)
         {
@@ -201,7 +194,7 @@ namespace WebApplication2.Controllers
             file.CopyTo(new FileStream(path, FileMode.Create));
 
             ApplicationUser u = user.GetUserAsync(HttpContext.User).Result;
-            u.ImagePath = pathImage;
+            u.ImagePath = "/"+pathImage;
             service.EditPhotoAsync(u);
             return PartialView("ImageDiv", user.GetUserAsync(HttpContext.User).Result);
         }

@@ -35,35 +35,79 @@ namespace WebApplication2.Controllers
             return Json(FriendsServiece.SearchFreinds(Name));
         }
 
-       
 
-       public IActionResult AddFriend(string id , string partial  , string name  )
+        [HttpPost]
+        public IActionResult AddFriend(string id , string partial  , string name  )
         {
             FriendsServiece.AddFriend(id);
+            ViewBag.friendState = FriendsServiece.GetFriendShipState(id);
 
 
             return PartialView(partial, FriendsServiece.SearchFreinds(name));     
         }
 
+
+
+       public IActionResult AddFriend(string id , string partial    )
+        {
+            FriendsServiece.AddFriend(id);
+            ViewBag.friendState = FriendsServiece.GetFriendShipState(id);
+
+
+            return PartialView(partial, FriendsServiece.GetUser(id));
+        }
+
+
+        [HttpPost]
         public IActionResult AcceptRequest(string Id , string partial  , string name)
         {
+            ViewBag.friendState = FriendsServiece.GetFriendShipState(Id);
 
             FriendsServiece.AcceptRequest(Id); 
             return PartialView( partial, FriendsServiece.SearchFreinds(name));
         }
+
+        public IActionResult AcceptRequest(string Id , string partial  )
+        {
+            ViewBag.friendState = FriendsServiece.GetFriendShipState(Id);
+
+            FriendsServiece.AcceptRequest(Id);
+
+            return PartialView(partial, FriendsServiece.GetUser(Id));
+        }
+
+        [HttpPost]
         public IActionResult  DeleteFriend(string id , string partial  , string name )
         {
             FriendsServiece.DeleteFriend(id);
-            
+            ViewBag.friendState = FriendsServiece.GetFriendShipState(id);
             return PartialView( partial, FriendsServiece.SearchFreinds(name));
         }
 
+        public IActionResult  DeleteFriend(string id , string partial   )
+        {
+            FriendsServiece.DeleteFriend(id);
+            ViewBag.friendState = FriendsServiece.GetFriendShipState(id);
+            return PartialView(partial, FriendsServiece.GetUser(id));
 
+        }
+
+        [HttpPost]
         public IActionResult RemoveRequest (string id, string partial, string name)
         {
             FriendsServiece.RemoveRequest(id);
+            ViewBag.friendState = FriendsServiece.GetFriendShipState(id);
 
             return PartialView(partial, FriendsServiece.SearchFreinds(name));
+        }
+        
+        public IActionResult RemoveRequest (string id, string partial)
+        {
+            FriendsServiece.RemoveRequest(id);
+
+            ViewBag.friendState = FriendsServiece.GetFriendShipState(id);
+
+            return PartialView(partial, FriendsServiece.GetUser(id));
         }
     }
 }

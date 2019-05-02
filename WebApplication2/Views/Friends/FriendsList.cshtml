@@ -12,12 +12,13 @@
 
 
         <div class=" row serch-item">
+            
             <div class="col-lg-2">
-                <img src="@String.Concat("/images" , user.ImagePath )" />
+                <img src="@String.Concat("" , user.ImagePath )" />
 
             </div>
             <div class="col-lg-3">
-                <a>
+                <a  asp-action="GetProfile" asp-controller="Profile" asp-route-id="@user.Id">
                     <p class="name"> @user.UserName </p>
                 </a>
 

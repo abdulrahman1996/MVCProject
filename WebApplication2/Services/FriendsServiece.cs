@@ -49,7 +49,10 @@ namespace WebApplication2.Services
         }
 
 
-
+        public ApplicationUser GetUser(string id)
+        {
+            return db.Users.Find(id);
+        }
         public IEnumerable<frindRequestDetail> GetAllFrinds(string id="")
         {
 
@@ -58,7 +61,7 @@ namespace WebApplication2.Services
                 id = LogginedId;
 
             var users = db.Users
-                .Where(u => !u.Id.Equals(LogginedId))
+                .Where(u => !u.Id.Equals(id))
                 .ToList();
                               
 
