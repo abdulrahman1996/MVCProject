@@ -74,7 +74,7 @@ namespace WebApplication2.Controllers
             file.CopyTo(new FileStream(path, FileMode.Create));
             
             ApplicationUser u = user.GetUserAsync(HttpContext.User).Result;
-            u.ImagePath = pathImage;
+            u.ImagePath = "/"+pathImage;
             service.EditPhotoAsync(u);
             return PartialView("ImageDiv", user.GetUserAsync(HttpContext.User).Result);
         }

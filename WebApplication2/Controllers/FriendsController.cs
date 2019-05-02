@@ -43,7 +43,7 @@ namespace WebApplication2.Controllers
             ViewBag.friendState = FriendsServiece.GetFriendShipState(id);
 
 
-            return PartialView(partial, FriendsServiece.GetUser(name));     
+            return PartialView(partial, FriendsServiece.SearchFreinds(name));     
         }
 
 
