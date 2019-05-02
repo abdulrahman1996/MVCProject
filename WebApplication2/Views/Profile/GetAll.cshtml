@@ -37,7 +37,7 @@
         <br>
         <a class="btn btn-primary" asp-controller="Profile" asp-action="IncrementLikes" asp-route-postId=@item.ID asp-route-userid=@ViewBag.CurrentUserID data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">Like</a>
         <br>
-        <form asp-controller="Profile" asp-action="AddComment" asp-route-postId=@item.ID asp-route-userid=@ViewBag.CurrentUserID data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData">
+        <form asp-controller="Profile" asp-action="AddComment" asp-route-postId=@item.ID asp-route-userid=@ViewBag.CurrentUserID data-ajax="true" data-ajax-method="get" data-ajax-update="#AllData">
             <input type="text" placeholder="enter your comment" style="width:300px;height:50px;border-radius:3px" name="content">
             <input type="submit" value="Comment" class="btn btn-primary">
 

@@ -15,7 +15,8 @@ namespace WebApplication2.Models
         public string Content { get; set; }
         [Required]
         public DateTime Timestamp { get; set; }
-        [ForeignKey("UserID")]
+        [ForeignKey("User")]
+        public string UserID;
         public virtual ApplicationUser User { get; set; }
         [ForeignKey("PostID")]
         public virtual Post Post { get; set; }

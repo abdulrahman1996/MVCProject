@@ -68,6 +68,7 @@ namespace WebApplication2.Services
         public List<Post> GetAllUserPosts(string userID)
         {
             return db.Posts.Include(usr => usr.User).Include(likes => likes.Likes).Include(comm => comm.Comments).Where(p => p.UserID == userID && p.Deleted != true).OrderByDescending(item => item.Timestamp).ToList();
+
         }
 
         public string GetUserID(string name)

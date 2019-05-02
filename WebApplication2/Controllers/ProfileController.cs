@@ -122,15 +122,15 @@ namespace WebApplication2.Controllers
             string CurrentUserID = user.GetUserAsync(HttpContext.User).Result.Id;
             ViewBag.CurrentUserID = userid;
 
-            userHomeService.IncrementLikes(postId, userid);
+            userHomeService.IncrementLikes(postId, CurrentUserID);
             return PartialView("GetAll", service.GetAllUserPosts(userid));
         }
-
+       
         public IActionResult AddComment(string content, int postId, string userid)
         {
-            //string CurrentUserID = UserManager.GetUserAsync(HttpContext.User).Result.Id;
-            ViewBag.CurrentUserID = userid;
-            userHomeService.AddComment(content, postId, userid);
+            string CurrentUserID = user.GetUserAsync(HttpContext.User).Result.Id;
+            ViewBag.CurrentUserID = CurrentUserID;
+            userHomeService.AddComment(content, postId,CurrentUserID );
 
             return PartialView("GetAll", service.GetAllUserPosts(userid));
 

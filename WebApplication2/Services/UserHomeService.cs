@@ -32,7 +32,7 @@ namespace WebApplication2.Services
            if(!AllIDs.Contains(currentUserId))
               AllIDs.Add(currentUserId);
 
-            return db.Posts.Include(usr => usr.User).Include(likes => likes.Likes).Include(comm => comm.Comments).Where(p =>AllIDs.Contains(p.User.Id) && p.Deleted!=true ).OrderByDescending(item => item.Timestamp).ToList();
+            return db.Posts.Include(usr => usr.User).Include(likes => likes.Likes).Include(comm => comm.Comments).Include(commuser=>commuser.Comments).Where(p =>AllIDs.Contains(p.User.Id) && p.Deleted!=true ).OrderByDescending(item => item.Timestamp).ToList();
         }
         public int LikesCount(int postid)
         {
@@ -74,6 +74,7 @@ namespace WebApplication2.Services
             {
                 Content = content,
                 User = user,
+                UserID = userid,
                 Post = post,
                 Deleted = false
             };

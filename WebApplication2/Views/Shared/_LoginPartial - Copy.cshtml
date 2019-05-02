@@ -31,17 +31,21 @@
                 </form>
             </li>
         </ul>
-    }else if (User.IsInRole("user"))
+    }else 
     {
+        @*<div>if (User.IsInRole("user"))</div>*@
         <ul class="nav navbar-nav">
             <li>
-                <a href="UserHome" style="font-weight:bold;font-size:large">Home</a>
+                <a href="/UserHome" style="font-weight:bold;font-size:large">Home</a>
             </li>
             <li>
-                <a href="Profile" style="font-weight:bold;font-size:large">Profile</a>
+                <a href="/Profile" style="font-weight:bold;font-size:large">Profile</a>
             </li>
             <li>
-                <a href="" style="font-weight:bold;font-size:large">Settings</a>
+                
+                <form asp-action="searchFriend" asp-controller="Friends" method="get">
+                    <input class="form-control " style="margin:10px; width:600px;" type="text" placeholder="Search Friends"  name="name"/>
+                </form>
             </li>
 
             <li>
