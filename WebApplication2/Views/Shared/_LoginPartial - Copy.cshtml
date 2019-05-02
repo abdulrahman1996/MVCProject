@@ -5,36 +5,65 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <ul class="nav navbar-nav">
-        <li>
-            <a href="/UserMangment"   style="font-weight:bold;font-size:large">User Management</a>
-        </li>
-        <li>
-            <a href="RoleMangment"   style="font-weight:bold;font-size:large">Role Management</a>
-        </li>
-        <li>
-            <a href="AdminSetting"   style="font-weight:bold;font-size:large">Settings</a>
-        </li>
+    @if (User.IsInRole("admin"))
+    {
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="/UserMangment" style="font-weight:bold;font-size:large">User Management</a>
+            </li>
+            <li>
+                <a href="RoleMangment" style="font-weight:bold;font-size:large">Role Management</a>
+            </li>
+            <li>
+                <a href="AdminSetting" style="font-weight:bold;font-size:large">Settings</a>
+            </li>
 
-        <li>
-            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        @*<a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>*@
-                    </li>
-                    <li>
-                        <button type="submit" class="btn btn-link navbar-btn navbar-link" style="color:white;font-weight:bold ;font-size:large">Logout</button>
-                    </li>
-                </ul>
-            </form>
-        </li>
-    </ul>
+            <li>
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @*<a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>*@
+                        </li>
+                        <li>
+                            <button type="submit" class="btn btn-link navbar-btn navbar-link" style="color:white;font-weight:bold ;font-size:large">Logout</button>
+                        </li>
+                    </ul>
+                </form>
+            </li>
+        </ul>
+    }else if (User.IsInRole("user"))
+    {
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="UserHome" style="font-weight:bold;font-size:large">Home</a>
+            </li>
+            <li>
+                <a href="Profile" style="font-weight:bold;font-size:large">Profile</a>
+            </li>
+            <li>
+                <a href="" style="font-weight:bold;font-size:large">Settings</a>
+            </li>
+
+            <li>
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @*<a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>*@
+                        </li>
+                        <li>
+                            <button type="submit" class="btn btn-link navbar-btn navbar-link" style="color:white;font-weight:bold ;font-size:large">Logout</button>
+                        </li>
+                    </ul>
+                </form>
+            </li>
+        </ul>
+    }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
-        <li><a asp-area="Identity" asp-page="/Account/Register"  style="font-weight:bold;font-size:large">Register</a></li>
-        <li><a asp-area="Identity" asp-page="/Account/Login"    style="font-weight:bold;font-size:large">Login</a></li>
-        <li><a href="~/Anonymous"   style="font-weight:bold;font-size:large">About</a></li>
+        <li><a asp-area="Identity" asp-page="/Account/Register" style="font-weight:bold;font-size:large">Register</a></li>
+        <li><a asp-area="Identity" asp-page="/Account/Login" style="font-weight:bold;font-size:large">Login</a></li>
+        <li><a href="~/Anonymous" style="font-weight:bold;font-size:large">About</a></li>
     </ul>
 }

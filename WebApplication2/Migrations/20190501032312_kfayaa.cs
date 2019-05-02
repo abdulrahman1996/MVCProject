@@ -2,7 +2,7 @@
 
 namespace WebApplication2.Migrations
 {
-    public partial class j : Migration
+    public partial class kfayaa : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

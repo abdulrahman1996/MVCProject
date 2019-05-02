@@ -1,24 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Index";
-
+    
 }
 
+
 <style>
-
-
     .imgcontainer {
         position: relative;
         text-align: center;
         color: white;
-        
-    }
-     .imgcontainer :hover {
-        opacity:0.5;
-        
     }
 
-
-
+        .imgcontainer :hover {
+            opacity: 0.5;
+        }
 
     .top-left {
         position: absolute;
@@ -26,28 +21,29 @@
         left: 16pt;
         color: grey;
     }
-    .fimg{
-        height:70pt;
-        image-orientation:unset;
+
+    .fimg {
+        height: 70pt;
+        image-orientation: unset;
     }
 </style>
 
 <div class="container">
     <div class="col-xs-4 bg-info">
-        
+
         <div class="row" id="MyGetAll">
             <div class="col-lg-4">
-                <partial name="ImageDiv" model="@Model" />
- 
+                <partial name="ImageDiv" model="@ViewBag.user" />
+
             </div>
             <div class="col-lg-2"></div>
-           
+
             <div id="friendBtn" class="col-lg-4">
                 @if (ViewBag.friendState != null)
                 {
                     <partial name="FriendBtn" model="@ViewBag.user" />
                 }
-                </div>
+            </div>
         </div>
         <div>
             <div id="MyInFoGetAll">
@@ -61,20 +57,24 @@
         <div class="   row">
             @foreach (var friend in ViewBag.friendes)
             {
-            <a asp-action="GetProfile" asp-route-id=@friend.Id>
+                <a asp-action="GetProfile" asp-route-id=@friend.Id>
 
-                <div class=" col-lg-4 imgcontainer">
+                    <div class=" col-lg-4 imgcontainer">
 
-                    <img src=@String.Concat("" , friend.ImagePath ) class="  fimg " />
-                    <div class="top-left">@friend.UserName</div>
-                </div>
-            </a> 
+                        <img src=@String.Concat("" , friend.ImagePath ) class="  fimg " />
+                        <div class="top-left">@friend.UserName</div>
+                    </div>
+                </a>
             }
 
         </div>
     </div>
     <div class="col-xs-8 bg-danger">
-        posts
+        <partial name="AddPost">
+            <div id="AllData">
+                <partial name="GetALL" model=ViewBag.posts>
+
+            </div>
     </div>
 
 </div>
@@ -97,11 +97,67 @@
     </div>
 </div>
 
+
+<div id="Createmodal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">edit</h5>
+
+            </div>
+            <div class="modal-body">
+                <div id="CreateData">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="EditmodalPosts" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">edit</h5>
+
+            </div>
+            <div class="modal-body">
+                <div id="EditPostData">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section Scripts
     {
     <script>
         function fun2() {
             $("#EditModal").modal("toggle")
         }
+
+        function successCreate() {
+            $("#Createmodal").modal("toggle");
+        }
+
+        function openModalLikes() {
+            $("#Createmodal").modal("toggle");
+
+        }
+
+        function successEdit() {
+            $("#EditModal").modal("toggle");
+        }
+                //function successEdit() {
+                //    $("#EditmodalPosts").modal("toggle");
+                //}
     </script>
 }

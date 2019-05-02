@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace WebApplication2.Services
         private UserManager<ApplicationUser> UserManager;
 
         public HttpContext HttpContext { get; set; }
-        public ProfileService(ApplicationDbContext d , UserManager<ApplicationUser> _userManager, IHttpContextAccessor httpContext)
+        public ProfileService(ApplicationDbContext d, UserManager<ApplicationUser> _userManager, IHttpContextAccessor httpContext)
         {
-            db = d; 
+            db = d;
             UserManager = _userManager;
             HttpContext = httpContext.HttpContext;
 
@@ -63,5 +64,22 @@ namespace WebApplication2.Services
         //{
         //    return;
         //}
+        ///////////////////////////////////////////////////////////////////////\
+        public List<Post> GetAllUserPosts(string userID)
+        {
+            return db.Posts.Include(usr => usr.User).Include(likes => likes.Likes).Include(comm => comm.Comments).Where(p => p.UserID == userID && p.Deleted != true).OrderByDescending(item => item.Timestamp).ToList();
+        }
+
+        public string GetUserID(string name)
+        {
+            return db.Users.Where(usr => usr.UserName == name).Select(usr=>usr.Id).FirstOrDefault();
+        }
+
+        public ApplicationUser GetUser(string ID)
+        {
+            return db.Users.Where(usr => usr.Id == ID).FirstOrDefault();
+        }
+
+
     }
 }

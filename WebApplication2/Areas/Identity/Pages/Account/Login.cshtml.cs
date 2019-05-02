@@ -83,10 +83,14 @@ namespace WebApplication2.Areas.Identity.Pages.Account
                     var CurrentUser = db.Users.Where(u => u.Email == Input.Email).FirstOrDefault();
                     var CurrentRole = db.UserRoles.Where(r => r.UserId == CurrentUser.Id).FirstOrDefault().RoleId;
                     var CurrentRoleName = db.Roles.Where(r => r.Id == CurrentRole).FirstOrDefault().Name;
-                     
-                    if(CurrentRoleName=="Admin")
+
+                    if (CurrentRoleName == "admin")
                     {
                         return LocalRedirect("/UserMangment");
+                    }
+                    else if (CurrentRoleName == "user")
+                    {
+                        return LocalRedirect("/UserHome");
                     }
                     else
                         return LocalRedirect(returnUrl);

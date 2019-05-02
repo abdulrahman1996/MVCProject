@@ -32,43 +32,59 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr style="text-align:center">
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr style="text-align:center">
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-           
-            <div class="col-md-10">
-                @*@Html.DropDownList("AllRoles",null, htmlAttributes: new { @class = "form-control" })*@
-                @*@Html.DropDownListFor(x=>item., ViewBag.CityList as SelectList, new { @class = "form-control" })*@
-            </div>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
 
-            <td></td>
-            <td style="text-align:center">
-                <a  asp-action="blockUser" asp-route-userID="@item.Id" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData" name="userID"><input type="checkbox" checked=@item.Blocked ></a> 
+                <td>
+                    <div class="col-md-10">
+                        <form asp-action="UpdateRole" data-ajax="true" data-ajax-method="Post" data-ajax-update="#AllData">
+                            @*<select>
+                                    @foreach(var item in )
 
-            </td>
-            <td>
-                <a asp-action="Delete" asp-route-userID="@item.Id" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData" class="btn btn-danger">Delete</a> 
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+                                </select>*@
+                            <input type="hidden" name="UserId" value=@item.Id />
+                            <select id="RoleId" name="RoleId">
+                                @foreach (var role in ViewBag.AllRoles)
+                                {
+                                    <option value=@role.Id>@role.Name</option>
+                                }
+                            </select>
+                            <button type="submit" class="btn btn-default">Edit Role</button>
+                            @*@Html.DropDownListFor(x => item, ViewBag.AllRoles as SelectList, new { @class = "form-control" })*@
+                            @*@Html.DropDownList("RoleName", ViewBag.AllRoles)*@
+                        </form>
+                    </div>
+                </td>
+                <td style="text-align:center">
+                    <a asp-action="blockUser" asp-route-userID="@item.Id" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData" name="userID"><input type="checkbox" checked=@item.Blocked></a>
+
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-userID="@item.Id" data-ajax="true" data-ajax-method="post" data-ajax-update="#AllData" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+
+

@@ -2,43 +2,91 @@
     //ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
-<partial name="AddPost">
+<section style="background-image: url(../images/cover.jpg)">
 
-    <div id="AllData">
-        <partial name="GetALL" model=ViewBag.posts>
+    <partial name="AddPost">
 
-    </div>
+        <div id="AllData">
+            <partial name="GetALL" model=ViewBag.posts>
 
-    <div id="Createmodal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">edit</h5>
-                    <button type="button" class="close" data-dismiss="modal">
-                        close
-                    </button>
-                </div>
-                <div class="modal-body" id="EditData">
+        </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <div id="Createmodal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">edit</h5>
+
+                    </div>
+                    <div class="modal-body">
+                        <div id="CreateData">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div id="Editmodal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">edit</h5>
+
+                    </div>
+                    <div class="modal-body">
+                        <div id="EditData">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"> Edit</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="EditData">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+</section>
 
 
-    @section Scripts
-        {
-        <script>
-            function successCreate() {
-                $("#Createmodal").modal("toggle");
-            }
-        </script>
+@section Scripts
+    {
+    <script>
+        function openModalLikes() {
+            $("#Createmodal").modal("toggle");
 
-    }
+        }
+        function successCreate() {
+            $("#Createmodal").modal("toggle");
+        }
+
+        function successEdit() {
+            $("#Editmodal").modal("toggle");
+        }
+    </script>
+
+}
 
 
 

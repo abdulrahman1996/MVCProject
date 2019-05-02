@@ -10,8 +10,8 @@ using WebApplication2.Data;
 namespace WebApplication2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190421163712_j")]
-    partial class j
+    [Migration("20190501032312_kfayaa")]
+    partial class kfayaa
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
