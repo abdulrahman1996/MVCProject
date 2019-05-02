@@ -57,10 +57,13 @@ namespace WebApplication2.Services
             var res=await UserManager.AddPasswordAsync(user, password);
         }
 
-        //public void UpdateUserRole(string)
-        //{
-
-        //}
+        public void UpdateUserRole(string RoleId, string UserId)
+        {
+            var usrrole = db.UserRoles.Where(userrole => userrole.UserId == UserId).FirstOrDefault();
+            db.UserRoles.Remove(usrrole);
+            db.UserRoles.Add(new IdentityUserRole<string>() { UserId = UserId, RoleId = RoleId });
+            db.SaveChanges();
+        }
 
     }
 }

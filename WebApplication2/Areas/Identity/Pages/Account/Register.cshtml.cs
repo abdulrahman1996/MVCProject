@@ -88,11 +88,13 @@ namespace WebApplication2.Areas.Identity.Pages.Account
                 var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email, Country = Input.Country, City = Input.City, Gender = Input.Gender,PhoneNumber=Input.phonenumber };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 var role = new ApplicationRole { Name = "user", Description = "default user" };
+                var role2 = new ApplicationRole { Name = "admin", Description = "system admin" };
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
                     await _roleManager.CreateAsync(role);
+                    await _roleManager.CreateAsync(role2);
                     await _userManager.AddToRoleAsync(user, "user");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

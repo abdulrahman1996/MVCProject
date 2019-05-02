@@ -17,23 +17,26 @@ namespace WebApplication2.Controllers
     {
         private readonly UserMangmentService UserService;
         private readonly UserManager<ApplicationUser> UserManager;
-        // private ApplicationDbContext db;
-        public UserMangmentController(UserMangmentService service, UserManager<ApplicationUser> usermanager)
+        private ApplicationDbContext db;
+        public UserMangmentController(UserMangmentService service, UserManager<ApplicationUser> usermanager, ApplicationDbContext CurrentContext)
         {
             UserService = service;
             UserManager = usermanager;
+            db = CurrentContext;
         }
         public IActionResult Index()
         {
             //var res = db.Roles.ToList();
-            ViewBag.AllRoles = new SelectList(UserService.GetAllRoles(), "Id", "Name");
+            //ViewBag.AllRoles = new SelectList(UserService.GetAllRoles(), "Id", "Name");
+            ViewBag.AllRoles = UserService.GetAllRoles();
             return View(UserService.GetAll());
         }
         public IActionResult GetAll()
         {
 
             // ViewBag.AllRoles = res;
-            ViewBag.AllRoles = new SelectList(UserService.GetAllRoles(), "Id", "Name");
+            //ViewBag.AllRoles = new SelectList(UserService.GetAllRoles(), "Id", "Name");
+            ViewBag.AllRoles = UserService.GetAllRoles();
 
             return PartialView(UserService.GetAll());
         }
@@ -72,9 +75,10 @@ namespace WebApplication2.Controllers
             return RedirectToAction("Index");
         }
 
-
-        public IActionResult UpdateRole(string selectedRoleId)
+        [HttpPost]
+        public IActionResult UpdateRole(string RoleId,string UserId)
         {
+            UserService.UpdateUserRole(RoleId, UserId);
             return PartialView("GetAll", UserService.GetAll());
         }
 
