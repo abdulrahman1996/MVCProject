@@ -33,6 +33,15 @@ namespace WebApplication2.Controllers
         public bool CurrUser = true;
         public IActionResult Index()
         {
+            string CurrentUserID = user.GetUserAsync(HttpContext.User).Result.Id;
+
+            var res = service.GetAllUserPosts(user.GetUserAsync(HttpContext.User).Result.Id);
+            ViewBag.posts = res;
+            ViewBag.CurrentUserID = user.GetUserAsync(HttpContext.User).Result.Id;
+            ViewBag.CurrentUserUserName = userHomeService.GetUserName(CurrentUserID);
+
+            ViewBag.user = user.GetUserAsync(HttpContext.User).Result;
+            ViewBag.img = user.GetUserAsync(HttpContext.User).Result;
 
             ViewBag.friendes = friendsServiece.GetAllFrinds();
             ViewBag.user = user.GetUserAsync(HttpContext.User).Result;
@@ -114,7 +123,7 @@ namespace WebApplication2.Controllers
             ViewBag.CurrentUserID = userid;
 
             userHomeService.IncrementLikes(postId, userid);
-            return PartialView("GetAll", service.GetAllUserPosts(CurrentUserID));
+            return PartialView("GetAll", service.GetAllUserPosts(userid));
         }
 
         public IActionResult AddComment(string content, int postId, string userid)
@@ -206,8 +215,12 @@ namespace WebApplication2.Controllers
             ViewBag.friendes = friendsServiece.GetAllFrinds(id);
             ViewBag.user = service.GetUser(id);
             ViewBag.friendState = friendsServiece.GetFriendShipState(id);
+            ViewBag.CurrentUserID = id;
 
-            return View("Index", service.GetUser(id));
+            var res = service.GetAllUserPosts(id);
+            ViewBag.posts = res;
+
+            return View("Index");
 
         }
 

@@ -85,7 +85,7 @@ namespace WebApplication2.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email, Country = Input.Country, City = Input.City, Gender = Input.Gender,PhoneNumber=Input.phonenumber };
+                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email, Country = Input.Country, City = Input.City, Gender = Input.Gender,PhoneNumber=Input.phonenumber,ImagePath= "/images/users/default-user-image.png" };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 var role = new ApplicationRole { Name = "user", Description = "default user" };
                 var role2 = new ApplicationRole { Name = "admin", Description = "system admin" };

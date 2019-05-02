@@ -70,7 +70,10 @@
         </div>
     </div>
     <div class="col-xs-8 bg-danger">
-        <partial name="AddPost">
+        @if (ViewBag.CurrUser == true)
+        {
+           <partial name="AddPost"/>
+        }
             <div id="AllData">
                 <partial name="GetALL" model=ViewBag.posts>
 
